@@ -1,0 +1,131 @@
+/* Banner Home */
+.banner {
+    width: 80%;
+    min-width: 260px;
+    margin: 0 auto;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Introduction */
+.introduction {
+    width: 60%;
+    min-width: 260px;
+    margin: 0 auto;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Historics */
+.historics {
+    width: 60%;
+    min-width: 260px;
+    margin: 20px auto;
+}
+
+.historics h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.historics .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-content: center;
+    gap: 10px;
+}
+
+.historics article {
+    width: 100%;
+    min-width: 240px;
+    min-height: 80px;
+    background-color: var(--networksPrimary);
+    border: 1px solid var(--historicsBorder);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-size: calc(1.1rem + 1vw);
+}
+
+.historics h3, .historics strong {
+    color: var(--thirdColor);
+    font-family: var(--fontText);
+    font-size: 1rem;
+}
+
+.historics .amount {
+    font-size: calc(1rem + 1vw);
+}
+
+/* Streamers */
+.streamers {
+    width: 60%;
+    min-width: 260px;
+    margin: 20px auto;
+}
+
+.streamers h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.streamers .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-content: center;
+    gap: 0px 10px;
+}
+
+.streamers article {
+    width: 100%;
+    min-width: 240px;
+    max-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.streamers a {
+    width: 100%;
+    height: 100%;
+}
+
+.streamers .containerImg {
+    width: 100%;
+    min-width: 240px;
+    height: 70%;
+    background-color: var(--networksPrimary);
+    border: 1px solid var(--historicsBorder);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.streamers img {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px #000);
+}
+
+.streamers h3 {
+    color: var(--thirdColor);
+    text-align: center;
+}
+
+.streamers a:hover h3 {
+    color: var(--secondaryColor);
+}
+
+.streamers a:hover .containerImg {
+    background-color: var(--secondaryColor);
+}

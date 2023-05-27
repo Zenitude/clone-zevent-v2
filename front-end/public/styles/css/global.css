@@ -4,6 +4,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    line-height: 1.5;
+    z-index: 1;
 }
 
 :root {
@@ -71,6 +73,8 @@ a, strong, h3 {
     width: 100%;
     min-height: 100vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 i {
@@ -79,4 +83,12 @@ i {
 
 svg {
     color: var(--networksSecondary)
+}
+
+main {
+    width: 100%;
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 10px;
 }
