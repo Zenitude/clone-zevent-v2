@@ -1,4 +1,6 @@
-@media all and (min-width: 330px) {
+@media all and (min-width: 385px) {
+
+    /* Header */
 
     .navigationHeader nav ul {
         flex-direction: row;
@@ -54,6 +56,16 @@
     .navigationHeader nav li:not(.navigationHeader nav li:first-of-type, .navigationHeader nav li:last-of-type):hover a {
         color: var(--secondaryColor);
     }
+
+    /* Associations */
+
+    .containerAssociations .buttonTabs button {
+        padding: 10px 15px;
+    }
+
+    .containerAssociations {
+        width: 80%;
+    }
 }
 
 @media all and (min-width: 700px) {
@@ -68,6 +80,8 @@
 }
 
 @media all and (min-width: 1000px) {
+
+    /* Header */
     .navigationHeader nav a i {
         display: none;
     }
@@ -76,8 +90,17 @@
         display: block;
     }
 
+    /* Home */
+
     .introduction p {
         text-align: justify;
+    }
+
+    /* Associations */
+
+    .contentTabs section p,  .contentTabs section li {
+        text-align: justify;
+        font-size: 1.2rem;
     }
 
 }

@@ -120,6 +120,8 @@
 .streamers h3 {
     color: var(--thirdColor);
     text-align: center;
+    font-family: var(--fontText);
+    font-size: 1.7rem;
 }
 
 .streamers a:hover h3 {

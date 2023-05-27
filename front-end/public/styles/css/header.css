@@ -39,6 +39,7 @@ header {
 
 .navigationHeader a {
     color: var(--thirdColor);
+    font-size: 1.3rem;
 }
 
 .navigationHeader nav li:last-of-type img {
@@ -160,4 +161,3 @@ header {
 .navigationHeader a:hover, .navigationHeader a:hover i, .networksHeader a:hover i {
     color: var(--secondaryColor);
 }
-
