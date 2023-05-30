@@ -1,1 +1,39 @@
-<h1>Page clips</h1>
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('./components/head.ejs'); %>
+
+    <body>
+        <div class="container containerClips">
+            <%- include('./components/header.ejs'); %>
+            <h1>Les plus vues</h1>
+
+            <div class="sidebar">
+                <nav>
+                    <ul>
+                        <li><a href="/donate">Faire un don</a></li>
+                        <li><a href="/shop">La boutique</a></li>
+                    </ul>
+                </nav>
+                <button>Tops</button>
+                <button>Best of</button>
+                <button>Tops par streamers</button>
+                <button>Récents</button>
+                <button>Jeux</button>
+            </div>
+
+            <div class="buttonTabsClips">
+                <button><span>Tout le week-end</span></button>
+                <button><span>Vendredi</span></button>
+                <button><span>Samedi</span></button>
+                <button><span>Dimanche</span></button>
+            </div>
+
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="scripts/header.js"></script>
+        <!-- <script type="module" src="scripts/clips.js"></script> -->
+
+    </body>
+</html>

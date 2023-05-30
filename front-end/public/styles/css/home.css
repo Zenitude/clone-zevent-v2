@@ -55,6 +55,14 @@
     font-size: calc(1.1rem + 1vw);
 }
 
+.historics article:last-of-type {
+    background-color: var(--secondaryColor);
+}
+
+.historics article:last-of-type h3, .historics article:last-of-type strong {
+    filter: drop-shadow(0 0 2px #000);
+}
+
 .historics h3, .historics strong {
     color: var(--thirdColor);
     font-family: var(--fontText);
@@ -111,9 +119,9 @@
 }
 
 .streamers img {
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
+    width: 90%;
+    height: 90%;
+    border-radius: 15px;
     filter: drop-shadow(0 0 5px #000);
 }
 

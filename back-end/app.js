@@ -1,9 +1,8 @@
-const express = require('express');
-const morgan = require('morgan');
-const dotenv = require('dotenv');
-const path = require('path');
-const fs = require('fs');
-const connectDb = require('./utils/database/database');
+const express = require("express");
+const morgan = require("morgan");
+const dotenv = require("dotenv");
+const path = require("path");
+const connectDb = require("./utils/database/database");
 
 dotenv.config();
 const app = express();
@@ -11,35 +10,37 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-const homeRoutes = require('./routes/home');
-const associationsRoutes = require('./routes/associations');
-// const clipsRoutes = require('./routes/clips');
-// const shopRoutes = require('./routes/shop');
+const homeRoutes = require("./routes/home");
+const associationsRoutes = require("./routes/associations");
+const clipsRoutes = require("./routes/clips");
+const shopRoutes = require('./routes/shop');
 
 connectDb();
 app.use(morgan("dev"));
 
-app.use('/images', express.static(path.join(__dirname, "../front-end/public/assets/images")));
-app.use('/styles', express.static(path.join(__dirname, "../front-end/public/styles/css/")));
-app.use('/scripts', express.static(path.join(__dirname, "../front-end/public/scripts/")));
+app.use("/images", express.static(path.join(__dirname, "../front-end/public/assets/images")));
+app.use("/styles", express.static(path.join(__dirname, "../front-end/public/styles/css/")));
+app.use("/scripts", express.static(path.join(__dirname, "../front-end/public/scripts/")));
 
 app.use((req, res, next) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
+    res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
     next();
 });
 
 app.use(homeRoutes);
 app.use(associationsRoutes);
+app.use(clipsRoutes);
+app.use(shopRoutes);
 
 app.use((req, res, next) => {
     try{
-        const title = 'Du 9 au 11 juin 2022';
-        res.status(200).render(path.join(__dirname, '../front-end/pages/error.ejs'), {title});    
+        const title = "Du 9 au 11 juin 2022";
+        res.status(200).render(path.join(__dirname, "../front-end/pages/error.ejs"), {title});    
     }
     catch(error) {
-        console.log('Error Try Page Error : ', error)
+        console.log("Error Try Page Error : ", error)
     }
 })
 

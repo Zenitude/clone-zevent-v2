@@ -9,3 +9,7 @@ if(document.querySelector('.menu')) {
         links.forEach(link => link.classList.toggle('active'));
     })
 }
+
+const data = new Date();
+const date = data.toLocaleDateString();
+const hours = data.toLocaleTimeString

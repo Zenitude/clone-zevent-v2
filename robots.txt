@@ -1,2 +1,7 @@
 User-agent: *
 Disallow: /
+Allow: /$
+Disallow: /shop
+Disallow: /associations
+Disallow: /clips
+Disallow: /*

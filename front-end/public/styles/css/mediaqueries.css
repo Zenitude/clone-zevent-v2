@@ -66,6 +66,17 @@
     .containerAssociations {
         width: 80%;
     }
+
+    /* Shop */
+    .containerShop .intercom {
+        width: 55px;
+        height: 55px;
+    }
+
+    .containerShop .intercom img, .containerShop .intercom svg {
+        width: 70%;
+        height: 70%;
+    }
 }
 
 @media all and (min-width: 700px) {
@@ -101,6 +112,11 @@
     .contentTabs section p,  .contentTabs section li {
         text-align: justify;
         font-size: 1.2rem;
+    }
+
+    /* Shop */
+    .containerShop .price {
+        min-height: 350px;
     }
 
 }
