@@ -1,3 +1,8 @@
+.containerHome main {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 /* Banner Home */
 .banner {
     width: 80%;
@@ -25,6 +30,7 @@
 /* Historics */
 .historics {
     width: 60%;
+    max-width: 940px;
     min-width: 260px;
     margin: 20px auto;
 }
@@ -76,6 +82,7 @@
 /* Streamers */
 .streamers {
     width: 60%;
+    max-width: 940px;
     min-width: 260px;
     margin: 20px auto;
 }

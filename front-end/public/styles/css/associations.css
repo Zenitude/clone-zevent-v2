@@ -5,6 +5,11 @@
     margin-inline: auto;
 }
 
+.containerAssociations main {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 /* Associations buttons Tabs and main Title */
 
 .containerAssociations .buttonTabs {

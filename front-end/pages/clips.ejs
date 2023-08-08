@@ -2,37 +2,213 @@
 
 <html lang="fr">
     <%- include('./components/head.ejs'); %>
-
+    
     <body>
         <div class="container containerClips">
             <%- include('./components/header.ejs'); %>
-            <h1>Les plus vues</h1>
+            <main>
 
-            <div class="sidebar">
-                <nav>
-                    <ul>
-                        <li><a href="/donate">Faire un don</a></li>
-                        <li><a href="/shop">La boutique</a></li>
-                    </ul>
-                </nav>
-                <button>Tops</button>
-                <button>Best of</button>
-                <button>Tops par streamers</button>
-                <button>Récents</button>
-                <button>Jeux</button>
-            </div>
+                <div class="sidebar">
+                    <nav>
+                        <ul>
+                            <li><a href="/donate">Faire un don</a></li>
+                            <li><a href="/shop">La boutique</a></li>
+                        </ul>
+                    </nav>
+                    <button>Tops</button>
+                    <button>Best of</button>
+                    <button>Tops par streamers</button>
+                    <button>Récents</button>
+                    <button>Jeux</button>
+                </div>
 
-            <div class="buttonTabsClips">
-                <button><span>Tout le week-end</span></button>
-                <button><span>Vendredi</span></button>
-                <button><span>Samedi</span></button>
-                <button><span>Dimanche</span></button>
-            </div>
+                <div class="buttonTabsClips">
+                    <button>
+                        <img src="images/header/hamburger.svg" alt="Afficher la sidebar" />
+                        <img src="images/header/close.svg" alt="Masquer la sidebar" />
+                    </button>
+                    <button class="active"><span>Tout le week-end</span></button>
+                    <button><span>Vendredi</span></button>
+                    <button><span>Samedi</span></button>
+                    <button><span>Dimanche</span></button>
+                </div>
 
+                <section class="all active">
+                    <h1>Les plus vues</h1>
+                    <div class="clips">
+                        <article>
+                            <video src="" controls></video>
+                            <div class="description">
+                                <p class="viewsAndTime">
+                                    <span>1 000 000 vues</span>
+                                    <span>01/01/2023 à 11:00</span>
+                                </p>
+                                <div class="avatarAndTitle">
+                                    <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                    <h3>bigard + alien = ALLAALLALALA (+ flop d'étoiles)</h3>
+                                </div>
+                                <p class="nameAndActivity">
+                                    <span>Nom streamer</span> -
+                                    <span>Activité</span>
+                                </p>
+                            </div>
+                        </article>
+                        <% for(let i = 0; i < 24 ; i++) { %>
+                            <article>
+                                <video src="" controls></video>
+                                <div class="description">
+                                    <p class="viewsAndTime">
+                                        <span>1 000 000 vues</span>
+                                        <span>01/01/2023 à 11:00</span>
+                                    </p>
+                                    <div class="avatarAndTitle">
+                                        <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                        <h3>Title</h3>
+                                    </div>
+                                    <p class="nameAndActivity">
+                                        <span>Nom streamer</span> -
+                                        <span>Activité</span>
+                                    </p>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                </section>
+
+                <section class="friday">
+                    <h1>Les plus vues vendredi</h1>
+                    <div class="clips">
+                        <article>
+                            <video src="" controls></video>
+                            <div class="description">
+                                <p class="viewsAndTime">
+                                    <span>1 000 000 vues</span>
+                                    <span>01/01/2023 à 11:00</span>
+                                </p>
+                                <div class="avatarAndTitle">
+                                    <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                    <h3>bigard + alien = ALLAALLALALA (+ flop d'étoiles)</h3>
+                                </div>
+                                <p class="nameAndActivity">
+                                    <span>Nom streamer</span> -
+                                    <span>Activité</span>
+                                </p>
+                            </div>
+                        </article>
+                        <% for(let i = 0; i < 24 ; i++) { %>
+                            <article>
+                                <video src="" controls></video>
+                                <div class="description">
+                                    <p class="viewsAndTime">
+                                        <span>1 000 000 vues</span>
+                                        <span>01/01/2023 à 11:00</span>
+                                    </p>
+                                    <div class="avatarAndTitle">
+                                        <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                        <h3>Title</h3>
+                                    </div>
+                                    <p class="nameAndActivity">
+                                        <span>Nom streamer</span> -
+                                        <span>Activité</span>
+                                    </p>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                </section>
+
+                <section class="saturday">
+                    <h1>Les plus vues samedi</h1>
+                    <div class="clips">
+                        <article>
+                            <video src="" controls></video>
+                            <div class="description">
+                                <p class="viewsAndTime">
+                                    <span>1 000 000 vues</span>
+                                    <span>01/01/2023 à 11:00</span>
+                                </p>
+                                <div class="avatarAndTitle">
+                                    <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                    <h3>bigard + alien = ALLAALLALALA (+ flop d'étoiles)</h3>
+                                </div>
+                                <p class="nameAndActivity">
+                                    <span>Nom streamer</span> -
+                                    <span>Activité</span>
+                                </p>
+                            </div>
+                        </article>
+                        <% for(let i = 0; i < 24 ; i++) { %>
+                            <article>
+                                <video src="" controls></video>
+                                <div class="description">
+                                    <p class="viewsAndTime">
+                                        <span>1 000 000 vues</span>
+                                        <span>01/01/2023 à 11:00</span>
+                                    </p>
+                                    <div class="avatarAndTitle">
+                                        <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                        <h3>Title</h3>
+                                    </div>
+                                    <p class="nameAndActivity">
+                                        <span>Nom streamer</span> -
+                                        <span>Activité</span>
+                                    </p>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                </section>
+
+                <section class="sunday">
+                    <h1>Les plus vues dimanche</h1>
+                    <div class="clips">
+                        <article>
+                            <video src="" controls></video>
+                            <div class="description">
+                                <p class="viewsAndTime">
+                                    <span>1 000 000 vues</span>
+                                    <span>01/01/2023 à 11:00</span>
+                                </p>
+                                <div class="avatarAndTitle">
+                                    <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                    <h3>bigard + alien = ALLAALLALALA (+ flop d'étoiles)</h3>
+                                </div>
+                                <p class="nameAndActivity">
+                                    <span>Nom streamer</span> -
+                                    <span>Activité</span>
+                                </p>
+                            </div>
+                        </article>
+                        <% for(let i = 0; i < 24 ; i++) { %>
+                            <article>
+                                <video src="" controls></video>
+                                <div class="description">
+                                    <p class="viewsAndTime">
+                                        <span>1 000 000 vues</span>
+                                        <span>01/01/2023 à 11:00</span>
+                                    </p>
+                                    <div class="avatarAndTitle">
+                                        <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                                        <h3>Title</h3>
+                                    </div>
+                                    <p class="nameAndActivity">
+                                        <span>Nom streamer</span> -
+                                        <span>Activité</span>
+                                    </p>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                </section>
+
+                
+            </main>
         </div>
 
         <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
         <script src="scripts/header.js"></script>
+        <script src="scripts/clips.js"></script>
+
         <!-- <script type="module" src="scripts/clips.js"></script> -->
 
     </body>

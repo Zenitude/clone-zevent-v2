@@ -89,7 +89,5 @@ svg {
 main {
     width: 100%;
     flex-grow: 1;
-    max-width: 1400px;
-    margin: 0 auto;
     padding: 20px 10px;
 }
