@@ -8,7 +8,7 @@
             <%- include('./components/header.ejs'); %>
             <main>
                 <h1 class="banner">
-                    <img src="images/zevent/zevent-banner.webp" alt="Zevent 2022, 8 septembre showcase dès 19h30, puis à partir vendredi 9 septembre 18h jusqu'au 11 septembre">
+                    <img src="/images/zevent/zevent-banner.webp" alt="Zevent 2022, 8 septembre showcase dès 19h30, puis à partir vendredi 9 septembre 18h jusqu'au 11 septembre">
                 </h1>
                 
                 <div class="introduction">
@@ -50,7 +50,7 @@
                                 <article>
                                     <a href="<%= streamers[i].twitch %>">
                                         <div class="containerImg">
-                                            <img src="images/streamers/<%= streamers[i].name.toLowerCase().split(' ').join('-') %>.webp" alt="Lien vers le profil de <%= streamers[i].name %>" >
+                                            <img src="/images/streamers/<%= streamers[i].name.toLowerCase().split(' ').join('-') %>.webp" alt="Lien vers le profil de <%= streamers[i].name %>" >
                                         </div>
                                         <h3><%= streamers[i].name %></h3>
                                     </a>
@@ -67,7 +67,7 @@
         </div>
 
         <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
-        <script src="scripts/header.js"></script>
+        <script src="/scripts/header.js"></script>
 
     </body>
 </html>

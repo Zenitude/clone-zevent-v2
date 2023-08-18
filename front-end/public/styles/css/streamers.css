@@ -1,0 +1,51 @@
+/* Delete Streamer */
+.containerDeleteStreamer main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.containerDeleteStreamer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.containerDeleteStreamer form button {
+    width: 250px;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+    border-radius: 15px;
+    border: none;
+}
+
+.containerDeleteStreamer form button:first-of-type {
+    background-color: var(--thirdColor);
+    color: rgba(0,0,0,1);
+    box-shadow: inset 0 0 30px #000;
+    border: 2px solid var(--thirdColor);
+}
+
+.containerDeleteStreamer form button:first-of-type:hover {
+    background-color: var(--secondaryColor);
+    color: var(--thirdColor);
+}
+
+.containerDeleteStreamer form button:first-of-type:hover span {
+    filter: drop-shadow(0 0 1px #000);
+}
+
+.containerDeleteStreamer form button:last-of-type {
+    background-color: rgb(187, 39, 39);
+    border: 2px solid var(--thirdColor);
+    box-shadow: inset 0 0 30px #000;
+}
+
+.containerDeleteStreamer form button:last-of-type:hover {
+    background-color: rgb(163, 17, 17);
+    color: var(--thirdColor);
+}
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerAdmin">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+                <h1>Liste des streamers</h1>
+                <a href="/streamers/create">Ajouter un streamer</a>
+
+                <% if(errorDeleteStreamer && errorDeleteStreamer != null) { %>
+                    <p><%= errorDeleteStreamer; %></p>
+                <% } %>
+
+                <% if(successDeleteStreamer && successDeleteStreamer != null) { %>
+                    <p><%= successDeleteStreamer; %> </p>
+                <% } %>
+
+                <% if(streamers) { %>
+                    <table>
+                        <% streamers.forEach(streamer => { %>
+                            <tr>
+                                <td><%= streamer.name; %></td>
+                                <td><a href=<%= `/streamers/${streamer._id}/update`; %>>Modifier</a></td>
+                                <td><a href=<%= `/streamers/${streamer._id}/delete`; %>>Supprimer</a></td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                <% } else { %>
+                    <p>Aucun streamer recensé pour le moment !</p>
+                <% } %>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

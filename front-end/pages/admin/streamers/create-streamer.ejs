@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerCreateStreamer">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <% if(errorCreateStreamer && errorCreateStreamer != null) { %>
+                    <p><%= errorCreateStreamer %></p>
+                <% } %>
+
+                <% if(successCreateStreamer && successCreateStreamer != null) { %>
+                    <p><%= successCreateStreamer %></p>
+                <% } %>
+
+                <h1>Ajouter un streamer</h1>
+
+                <form action="/streamers/create/add" method="POST" enctype="multipart/form-data">
+
+                    <div>
+                        <input type="text" name="pseudo" id="pseudo" autocomplete="off" />
+                        <label for="pseudo">Nom Streamer</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="channel" id="channel" autocomplete="off" />
+                        <label for="channel">Chaine twitch</label>
+                    </div>
+
+                    <div>
+                        <input type="file" name="file" id="file" autocomplete="off" />
+                        <label for="file">Avatar</label>
+                    </div>
+
+                    <button><span>Ajouter</span></button>
+                </form>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

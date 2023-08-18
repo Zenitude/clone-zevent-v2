@@ -7,9 +7,9 @@ if(document.querySelector('.menu')) {
         iconHamburger.classList.toggle('active');
         iconClose.classList.toggle('active');
         links.forEach(link => link.classList.toggle('active'));
-    })
+    });
 }
 
 const data = new Date();
 const date = data.toLocaleDateString();
-const hours = data.toLocaleTimeString
+const hours = data.toLocaleTimeString();

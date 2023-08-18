@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerAdmin">
+            <%- include('../components/header.ejs'); %>
+            <main>  
+                <h1>Admin Dashboard</h1>
+
+                <div>
+                    <section class="users">
+                        <h2>Utilisateurs</h2>
+                        <ul><li><a href="/users">Liste</a></li></ul>
+                    </section>
+
+                    <section class="streamers">
+                        <h2>Streamers</h2>
+                        <ul><li><a href="/streamers">Liste</a></li></ul>
+                    </section>
+
+                    <section class="historics">
+                        <h2>Historiques</h2>
+                        <ul><li><a href="/historics">Liste</a></li></ul>
+                    </section>
+                </div>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>
