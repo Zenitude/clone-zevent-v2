@@ -10,8 +10,8 @@
                 <h1>Liste des streamers</h1>
                 <a href="/streamers/create">Ajouter un streamer</a>
 
-                <% if(errorDeleteStreamer && errorDeleteStreamer != null) { %>
-                    <p><%= errorDeleteStreamer; %></p>
+                <% if(errorStreamer && errorStreamer != null) { %>
+                    <p><%= errorStreamer; %></p>
                 <% } %>
 
                 <% if(successDeleteStreamer && successDeleteStreamer != null) { %>

@@ -30,7 +30,7 @@ const findStreamerByName = async (req) => {
 const newStreamer = async (req, res) => {
 
     try{
-
+        console.log(req);
         const file = req.files[0];
         const tempFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", file.originalname);
         const sanitizedPseudo = req.body.pseudo.toLowerCase().split(' ').join('-');
@@ -82,6 +82,80 @@ const newStreamer = async (req, res) => {
     }
 }
 
+const modifyStreamer = async (req, res) => {
+
+    try{
+        if(req.files.length > 0) {
+            const file = req.files[0];
+
+            const tempFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", file.originalname);
+            const sanitizedPseudo = req.body.pseudo.toLowerCase().split(' ').join('-');
+            const tempNewFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", `${sanitizedPseudo}.webp`);
+            const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/streamers", `${sanitizedPseudo}.webp`);
+            
+            fs.writeFile(tempFilePath, file.buffer, (err) => {
+                if (err) {
+                    console.error('Erreur lors de l\'écriture de tempFilePath : ', err);
+                }
+            });
+            
+            if (fs.existsSync(newFilePath)) {
+                try {
+                    fs.writeFile(newFilePath, file.buffer, (err) => {
+                        if (err) {
+                            console.error('Erreur lors de l\'écriture de newFilePath : ', err);
+                        }
+                    });
+                } catch(error) {
+                    console.log('Erreur lors de l\'écriture de newFilePath : ', error);
+                }
+            } else {
+                await sharp(tempFilePath)
+                .webp({quality: 80})
+                .toFile(tempNewFilePath)
+                
+                await sharp(tempNewFilePath)
+                .toFile(newFilePath);
+            }
+        } else {
+            await findStreamerById(req.params.id)
+            .then(streamer => {
+                const sanitizedPseudo = req.body.pseudo.toLowerCase().split(' ').join('-');
+                const oldPseudo = streamer.name.toLowerCase().split(' ').join('-');
+                const oldFilePath = path.join(__dirname, "../../front-end/public/assets/images/streamers", `${oldPseudo}.webp`);
+                const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/streamers", `${sanitizedPseudo}.webp`);
+    
+                fs.rename(oldFilePath, newFilePath, (err) => {
+                    if (err) {
+                        console.error('Erreur lors du renommage du fichier : ', err);
+                    } else {
+                        console.log('Fichier renommé avec succès !');
+                    }
+                });
+            })
+            .catch(error => console.log(error));
+        }
+            
+        const modifyStreamer = {
+            name: req.body.pseudo,
+            twitch: req.body.channel
+        };
+
+        await Streamer.updateOne({ _id: req.params.id}, { ...modifyStreamer})
+        .then(result => {
+            req.session.successUpdateStreamer = `Streamer ${req.body.pseudo} mis à jour avec succès.`;
+            res.status(201).redirect(`/streamers/${req.params.id}/update`);
+        })
+        .catch(error => {
+            req.session.errorUpdateStreamer = `Erreur lors de la tentative de modification d'un streamer, ${error.message}.`;
+            res.status(500).redirect(`/streamers/${req.params.id}/update`);
+        });
+    }
+    catch(error) {
+        console.log('Erreur lors du traitement des données : ', error);
+    }
+}
+
 exports.listStreamers = async (req, res, next) => {
     try {
         const token = req.cookies.token;
@@ -99,9 +173,9 @@ exports.listStreamers = async (req, res, next) => {
 
             const title = "Du 9 au 11 septembre 2022";
             const successDeleteStreamer = req.session.successDeleteStreamer ? req.session.successDeleteStreamer : null;
-            const errorDeleteStreamer = req.session.errorDeleteStreamer ? req.session.errorDeleteStreamer : null;
+            const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
 
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/list-streamers.ejs"), { title, streamers, errorDeleteStreamer, successDeleteStreamer });
+            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/list-streamers.ejs"), { title, streamers, errorStreamer, successDeleteStreamer });
         })
         .catch(error => console.log(error))
 
@@ -166,8 +240,23 @@ exports.updateStreamer = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        const title = "Du 9 au 11 septembre 2022";
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/update-streamer.ejs"), { title });        
+        await findStreamerById(req.params.id)
+        .then(streamer => {
+            if(streamer) {
+                const title = "Du 9 au 11 septembre 2022";
+                const errorUpdateStreamer = req.session.errorUpdateStreamer ? req.session.errorUpdateStreamer : null;
+                const successUpdateStreamer = req.session.successUpdateStreamer ? req.session.successUpdateStreamer : null;
+                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/update-streamer.ejs"), { title, streamer, errorUpdateStreamer, successUpdateStreamer });
+            } else {
+                req.session.errorStreamer = `Streamer inexistant`;
+                res.status(401).redirect('/streamers');
+            }
+        })
+        .catch(error => {
+            req.session.errorStreamer = `Erreur Mise à jour Streamer`;
+            console.log(error);
+            res.status(401).redirect('/streamers');
+        })      
     }
     catch(error) {
         console.log("Try Error Update Streamer Page : ", error);
@@ -182,8 +271,21 @@ exports.updateConfirmStreamer = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        const title = "Du 9 au 11 septembre 2022";
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/update-streamer.ejs"), { title });        
+        verifInputs(req, res);
+
+        await findStreamerById(req.params.id)
+        .then(streamer => {
+            if(streamer) {
+                modifyStreamer(req, res);
+            } else {
+                req.session.errorStreamer = `Streamer ${req.params.id} inexistant`;
+                res.status(401).redirect(`/streamers`);
+            }
+        })
+        .catch(error => {
+            req.session.errorStreamer = `Erreur lors de la recherche d'un streamer, ${error.message}.`;
+            res.status(500).redirect("/streamers");
+        })       
     }
     catch(error) {
         console.log("Try Error Update Streamer Page : ", error);
@@ -197,7 +299,7 @@ exports.deleteStreamer = async (req, res, next) => {
         await findStreamerById(req.params.id)
         .then(streamer => {
             if(!streamer) { 
-                req.session.errorDeleteStreamer = `Streamer ${req.params.id} non trouvé`;
+                req.session.errorStreamer = `Streamer ${req.params.id} non trouvé`;
                 req.session.successDeleteStreamer = null;
                 res.redirect("/streamers");
             } else {
@@ -207,7 +309,7 @@ exports.deleteStreamer = async (req, res, next) => {
         })
         .catch(error => {
             req.session.successDeleteStreamer = null;
-            req.session.errorDeleteStreamer = `Streamer ${req.params.id} non trouvé, ${error.message}`;
+            req.session.errorStreamer = `Streamer ${req.params.id} non trouvé, ${error.message}`;
             res.redirect("/streamers");
         })
     }
@@ -221,14 +323,14 @@ exports.deleteConfirmStreamer = async (req, res, next) => {
         await findStreamerById(req.params.id)
         .then(streamer => {
             if(!streamer) {
-                req.session.errorDeleteStreamer = `Streamer ${req.params.id} non trouvé`;
+                req.session.errorStreamer = `Streamer ${req.params.id} non trouvé`;
                 req.session.successDeleteStreamer = null;
                 res.redirect("/streamers");
             } else {
                 streamer.deleteOne({ _id: req.params.id })
                 .then(() => {
                     req.session.successDeleteStreamer = `Streamer ${streamer.name} supprimé avec succès.`;
-                    req.session.errorDeleteStreamer = null;
+                    req.session.errorStreamer = null;
                     res.redirect("/streamers");
                 })
                 .catch(error => {
@@ -238,7 +340,7 @@ exports.deleteConfirmStreamer = async (req, res, next) => {
             }
         })
         .catch(error => {
-            req.session.errorDeleteStreamer = `Streamer ${req.params.id} non trouvé, ${error.message}`;
+            req.session.errorStreamer = `Streamer ${req.params.id} non trouvé, ${error.message}`;
             res.redirect("/streamers");
         })
     }

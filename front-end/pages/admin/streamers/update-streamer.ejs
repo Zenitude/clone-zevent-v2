@@ -4,12 +4,50 @@
     <%- include('../../components/head.ejs'); %>
     
     <body>
-        <div class="container containerAdmin">
+        <div class="container containerUpdateStreamer">
             <%- include('../../components/header.ejs'); %>
             <main>  
-                <h1>Mettre à jour un streamer</h1>
 
-        
+                <main>  
+
+                    <% if(errorUpdateStreamer && errorUpdateStreamer != null) { %>
+                        <p><%= errorUpdateStreamer %></p>
+                    <% } %>
+    
+                    <% if(successUpdateStreamer && successUpdateStreamer != null) { %>
+                        <p><%= successUpdateStreamer %></p>
+                    <% } %>
+    
+                    <h1>Mise à jour de <%= streamer ? streamer.name : '' %></h1>
+    
+                    <% if(streamer) { %>
+                        <img src="/images/streamers/<%= streamer.name.split(' ').join('-') %>.webp" alt="avatar de <%= streamer.name %>" />
+                    <% } %>
+
+                    <form action="/streamers/<%= streamer._id %>/update/modify?_method=PUT" method="POST" enctype="multipart/form-data">
+    
+                        <div>
+                            <input type="text" name="pseudo" id="pseudo" autocomplete="off" value="<%= streamer ? streamer.name : '' %>"/>
+                            <label for="pseudo">Nom Streamer</label>
+                        </div>
+    
+                        <div>
+                            <input type="text" name="channel" id="channel" autocomplete="off" value="<%= streamer ? streamer.twitch : '' %>"/>
+                            <label for="channel">Chaine twitch</label>
+                        </div>
+    
+                        
+                        <div>
+                            <input type="file" name="file" id="file" autocomplete="off" />
+                            <label for="file">Avatar</label>
+                        </div>
+    
+                        <button><span>Mettre à jour</span></button>
+                    </form>
+    
+                    <a href="/streamers">Revenir à la liste des streamers</a>
+    
+                </main>
 
             </main>
         </div>

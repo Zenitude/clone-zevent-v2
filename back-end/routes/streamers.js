@@ -17,7 +17,7 @@ router.get("/streamers/:id/delete", authMiddleware, deleteStreamer);
 router.post("/streamers/create/add", authMiddleware, createConfirmStreamer);
 
 // UPDATE
-router.put("/streamers/:id/update", authMiddleware, updateConfirmStreamer)
+router.put("/streamers/:id/update/modify", authMiddleware, updateConfirmStreamer)
 
 // DELETE
 router.delete("/streamers/:id/delete", authMiddleware, deleteConfirmStreamer);

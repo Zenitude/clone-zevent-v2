@@ -91,3 +91,7 @@ main {
     flex-grow: 1;
     padding: 20px 10px;
 }
+
+button {
+    cursor: pointer;
+}
