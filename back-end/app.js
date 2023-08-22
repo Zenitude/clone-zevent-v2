@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const path = require("path");
+const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const multer = require("multer");
@@ -12,7 +13,8 @@ const connectDb = require("./utils/database/database");
 dotenv.config();
 const app = express();
 
-app.use(express.urlencoded({extended: true}));
+// app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(multer().any());

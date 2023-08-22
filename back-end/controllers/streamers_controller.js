@@ -1,8 +1,7 @@
 const Streamer = require("../models/Streamer");
 const path = require("path");
-const multer = require("multer");
 const sharp = require("sharp");
-const fs = require("fs/promises");
+const fs = require("fs");
 const { body, validationResult } = require("express-validator");
 
 const verifInputs = async (req, res) => {
@@ -28,43 +27,59 @@ const findStreamerByName = async (req) => {
     return await Streamer.findOne({ name: req.body.pseudo })
 }
 
-const storage = multer.memoryStorage();
-exports.upload = multer({storage: storage});
-
 const newStreamer = async (req, res) => {
 
-    const newStreamer = new Streamer({
-        name: req.body.pseudo,
-        twitch: req.body.channel
-    });
+    try{
 
-    const sanitizedPseudo = req.body.pseudo.toLowerCase().split(' ').join('-');
-    const webpFilename = sanitizedPseudo + ".webp";
-    const webpPath = path.join(__dirname, `../../front-end/public/assets/images/streamers/${webpFilename}`);
-    // const convertedWebpPath = path.join(__dirname, `../../front-end/public/assets/images/streamers/temp.webp`);
-    console.log(sanitizedPseudo);
-    console.log(webpFilename)
-    console.log(webpPath);
-    // await sharp(req.file.buffer)
-    // .webp({ quality: 80 })
-    // .toFile(convertedWebpPath);
+        const file = req.files[0];
+        const tempFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", file.originalname);
+        const sanitizedPseudo = req.body.pseudo.toLowerCase().split(' ').join('-');
+        const tempNewFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", `${sanitizedPseudo}.webp`);
+        const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/streamers", `${sanitizedPseudo}.webp`);
+        
+        fs.writeFile(tempFilePath, file.buffer, (err) => {
+            if (err) {
+                console.error('Erreur lors de l\'écriture de tempFilePath : ', err);
+            }
+        });
 
-    // Check if the generated WebP filename already exists
-    // if (await fileExists(webpPath)) {
-    //     await fs.unlink(webpPath);
-    // }
+        if (fs.existsSync(newFilePath)) {
+            try {
+                fs.writeFile(newFilePath, file.buffer, (err) => {
+                    if (err) {
+                        console.error('Erreur lors de l\'écriture de newFilePath : ', err);
+                    }
+                });
+            } catch(error) {
+                console.log('Erreur lors de l\'écriture de newFilePath : ', error);
+            }
+        } else {
+            await sharp(tempFilePath)
+            .webp({quality: 80})
+            .toFile(tempNewFilePath)
+            
+            await sharp(tempNewFilePath)
+            .toFile(newFilePath);
+        }
+      
+        const newStreamer = new Streamer({
+            name: req.body.pseudo,
+            twitch: req.body.channel
+        });
 
-    // await fs.rename(convertedWebpPath, webpPath);
-    
-    newStreamer.save()
-    .then(result => {
-        req.session.successCreateStreamer = `Streamer ${result.name} créé avec succès.`;
-        res.status(201).redirect("/streamers/create");
-    })
-    .catch(error => {
-        req.session.errorCreateStreamer = `Erreur lors de la tentative de création d'un streamer, ${error.message}.`;
-        res.status(500).redirect("/streamers/create");
-    });
+        newStreamer.save()
+        .then(result => {
+            req.session.successCreateStreamer = `Streamer ${result.name} créé avec succès.`;
+            res.status(201).redirect("/streamers/create");
+        })
+        .catch(error => {
+            req.session.errorCreateStreamer = `Erreur lors de la tentative de création d'un streamer, ${error.message}.`;
+            res.status(500).redirect("/streamers/create");
+        });
+    }
+    catch(error) {
+        console.log('Erreur lors du traitement des données : ', error);
+    }
 }
 
 exports.listStreamers = async (req, res, next) => {

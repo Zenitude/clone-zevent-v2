@@ -2,8 +2,7 @@ const express = require("express");
 const { authMiddleware } = require("../utils/middlewares/auth");
 const { 
     listStreamers, deleteStreamer, createStreamer, updateStreamer, 
-    createConfirmStreamer, updateConfirmStreamer, deleteConfirmStreamer,
-    upload
+    createConfirmStreamer, updateConfirmStreamer, deleteConfirmStreamer
 } = require("../controllers/streamers_controller");
 
 const router = express.Router();
@@ -15,7 +14,7 @@ router.get("/streamers/:id/update", authMiddleware, updateStreamer);
 router.get("/streamers/:id/delete", authMiddleware, deleteStreamer);
 
 // CREATE
-router.post("/streamers/create/add", authMiddleware, upload.single('file'), createConfirmStreamer);
+router.post("/streamers/create/add", authMiddleware, createConfirmStreamer);
 
 // UPDATE
 router.put("/streamers/:id/update", authMiddleware, updateConfirmStreamer)

@@ -56,7 +56,7 @@ exports.login = async (req, res, next) => {
 
                 res.cookie('token', token, {
                     httpOnly: true,
-                    maxAge: 86400
+                    maxAge: 604800000 // 1 semaine
                 });
 
                 res.redirect("/admin");
