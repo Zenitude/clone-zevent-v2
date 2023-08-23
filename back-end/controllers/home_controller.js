@@ -1,5 +1,6 @@
 const Streamer = require("../models/Streamer");
 const Historic = require("../models/Historic");
+const bcrypt = require('bcrypt');
 const path = require("path");
 
 const findStreamers = async () => {
@@ -12,9 +13,13 @@ const findHistorics = async () => {
 
 exports.homeRender = async (req, res, next) => {
     try {
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Accueil";
         const streamers = await findStreamers();
         const historics = await findHistorics();
+        //const salt = bcrypt.genSalt(10);
+        const password = bcrypt.hashSync('admin', 10);
+        console.log(password);
+        
         res.status(200).render(path.join(__dirname, "../../front-end/pages/index.ejs"), { title, streamers, historics });        
     }
     catch(error) {

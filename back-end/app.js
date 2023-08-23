@@ -31,6 +31,8 @@ const clipsRoutes = require("./routes/clips");
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
 const streamersRoutes = require('./routes/streamers');
+const historicsRoutes = require('./routes/historics');
+const usersRoutes = require('./routes/users');
 
 connectDb();
 
@@ -54,10 +56,12 @@ app.use(clipsRoutes);
 app.use(shopRoutes);
 app.use(adminRoutes);
 app.use(streamersRoutes);
+app.use(historicsRoutes);
+app.use(usersRoutes);
 
 app.use((req, res, next) => {
     try{
-        const title = "Du 9 au 11 juin 2022";
+        const title = "Erreur 404";
         res.status(200).render(path.join(__dirname, "../front-end/pages/error.ejs"), {title});    
     }
     catch(error) {

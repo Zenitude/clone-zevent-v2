@@ -2,7 +2,7 @@ const path = require("path");
 
 exports.associationsRender = async (req, res, next) => {
     try {
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Les associations";
         
         res.status(200).render(path.join(__dirname, "../../front-end/pages/associations.ejs"), { title });        
     }

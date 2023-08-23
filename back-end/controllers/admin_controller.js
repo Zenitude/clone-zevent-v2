@@ -29,7 +29,7 @@ exports.loginRender = async (req, res, next) => {
             res.status(200).redirect('/');
         }
 
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Connexion Admin";
         res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/login.ejs"), { title, errorFindUser });        
     }
     catch(error) {
@@ -77,7 +77,7 @@ exports.login = async (req, res, next) => {
 
 exports.adminRender = async (req, res, next) => {
     try {
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Dashboard";
         const userConnected = req.session.userConnected ? req.session.userConnected : null;
 
         if(userConnected === false) {

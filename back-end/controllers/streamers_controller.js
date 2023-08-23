@@ -171,7 +171,7 @@ exports.listStreamers = async (req, res, next) => {
                 else { return 0 }
             });
 
-            const title = "Du 9 au 11 septembre 2022";
+            const title = "Liste des streamers";
             const successDeleteStreamer = req.session.successDeleteStreamer ? req.session.successDeleteStreamer : null;
             const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
 
@@ -193,7 +193,7 @@ exports.createStreamer = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Créer un streamer";
         const errorCreateStreamer = req.session.errorCreateStreamer ? req.session.errorCreateStreamer : null;
         const successCreateStreamer = req.session.successCreateStreamer ? req.session.successCreateStreamer : null;
         res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/create-streamer.ejs"), { title, errorCreateStreamer, successCreateStreamer });
@@ -243,7 +243,7 @@ exports.updateStreamer = async (req, res, next) => {
         await findStreamerById(req.params.id)
         .then(streamer => {
             if(streamer) {
-                const title = "Du 9 au 11 septembre 2022";
+                const title = "Mettre à jour un streamer";
                 const errorUpdateStreamer = req.session.errorUpdateStreamer ? req.session.errorUpdateStreamer : null;
                 const successUpdateStreamer = req.session.successUpdateStreamer ? req.session.successUpdateStreamer : null;
                 res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/update-streamer.ejs"), { title, streamer, errorUpdateStreamer, successUpdateStreamer });
@@ -294,7 +294,7 @@ exports.updateConfirmStreamer = async (req, res, next) => {
 
 exports.deleteStreamer = async (req, res, next) => {
     try {
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "Supprimer un streamer";
 
         await findStreamerById(req.params.id)
         .then(streamer => {

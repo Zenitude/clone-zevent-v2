@@ -3,7 +3,7 @@ const fs = require("fs");
 
 exports.shopRender = async (req, res, next) => {
     try {
-        const title = "Du 9 au 11 septembre 2022";
+        const title = "La boutique";
         const datas = fs.readFileSync(path.join(__dirname, '../utils/database/shop.json'), 'utf-8');
         const products = await JSON.parse(datas);
         res.status(200).render(path.join(__dirname, "../../front-end/pages/shop.ejs"), { title, products });        
