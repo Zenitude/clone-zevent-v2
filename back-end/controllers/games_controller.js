@@ -1,5 +1,7 @@
 const Game = require("../models/Game");
 const path = require("path");
+const fs = require('fs');
+const sharp = require('sharp');
 const { body, validationResult } = require("express-validator");
 
 const verifInputs = async (req, res) => {
@@ -28,6 +30,37 @@ const findGameByName = async (req) => {
 const newGame = async (req, res) => {
 
     try{
+        console.log(req);
+        const file = req.files[0];
+        const tempFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", file.originalname);
+        const sanitizedName = req.body.name.replace(':', 'µ').toLowerCase().split(' ').join('-');
+        const tempNewFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", `${sanitizedName}.webp`);
+        const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/games", `${sanitizedName}.webp`);
+        
+        fs.writeFile(tempFilePath, file.buffer, (err) => {
+            if (err) {
+                console.error('Erreur lors de l\'écriture de tempFilePath : ', err);
+            }
+        });
+
+        if (fs.existsSync(newFilePath)) {
+            try {
+                fs.writeFile(newFilePath, file.buffer, (err) => {
+                    if (err) {
+                        console.error('Erreur lors de l\'écriture de newFilePath : ', err);
+                    }
+                });
+            } catch(error) {
+                console.log('Erreur lors de l\'écriture de newFilePath : ', error);
+            }
+        } else {
+            await sharp(tempFilePath)
+            .webp({quality: 80})
+            .toFile(tempNewFilePath)
+            
+            await sharp(tempNewFilePath)
+            .toFile(newFilePath);
+        }
         
         const newGame = new Game({
             name: req.body.name,
@@ -52,6 +85,57 @@ const newGame = async (req, res) => {
 const modifyGame = async (req, res) => {
 
     try{
+
+        if(req.files.length > 0) {
+            const file = req.files[0];
+
+            const tempFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", file.originalname);
+            const sanitizedName = req.body.name.replace(':', 'µ').toLowerCase().split(' ').join('-');
+            const tempNewFilePath = path.join(__dirname, "../../front-end/public/assets/images/temp", `${sanitizedName}.webp`);
+            const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/games", `${sanitizedName}.webp`);
+            
+            fs.writeFile(tempFilePath, file.buffer, (err) => {
+                if (err) {
+                    console.error('Erreur lors de l\'écriture de tempFilePath : ', err);
+                }
+            });
+            
+            if (fs.existsSync(newFilePath)) {
+                try {
+                    fs.writeFile(newFilePath, file.buffer, (err) => {
+                        if (err) {
+                            console.error('Erreur lors de l\'écriture de newFilePath : ', err);
+                        }
+                    });
+                } catch(error) {
+                    console.log('Erreur lors de l\'écriture de newFilePath : ', error);
+                }
+            } else {
+                await sharp(tempFilePath)
+                .webp({quality: 80})
+                .toFile(tempNewFilePath)
+                
+                await sharp(tempNewFilePath)
+                .toFile(newFilePath);
+            }
+        } else {
+            await findGameById(req.params.id)
+            .then(game => {
+                const sanitizedName = req.body.name.replace(':', 'µ').toLowerCase().split(' ').join('-');
+                const oldName = game.name.replace(':', 'µ').toLowerCase().split(' ').join('-');
+                const oldFilePath = path.join(__dirname, "../../front-end/public/assets/images/games", `${oldName}.webp`);
+                const newFilePath = path.join(__dirname, "../../front-end/public/assets/images/games", `${sanitizedName}.webp`);
+    
+                fs.rename(oldFilePath, newFilePath, (err) => {
+                    if (err) {
+                        console.error('Erreur lors du renommage du fichier : ', err);
+                    } else {
+                        console.log('Fichier renommé avec succès !');
+                    }
+                });
+            })
+            .catch(error => console.log(error));
+        }
         
         const modifyGame = {
             name: req.body.name,
