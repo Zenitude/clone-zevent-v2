@@ -15,11 +15,7 @@ exports.homeRender = async (req, res, next) => {
     try {
         const title = "Accueil";
         const streamers = await findStreamers();
-        const historics = await findHistorics();
-        //const salt = bcrypt.genSalt(10);
-        const password = bcrypt.hashSync('admin', 10);
-        console.log(password);
-        
+        const historics = await findHistorics();    
         res.status(200).render(path.join(__dirname, "../../front-end/pages/index.ejs"), { title, streamers, historics });        
     }
     catch(error) {

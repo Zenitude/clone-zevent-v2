@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const path = require("path");
+const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
 
 const verifInputs = async (req, res) => {
@@ -38,7 +39,8 @@ const newUser = async (req, res) => {
             firstname: req.body.firstname,
             birthdate: req.body.birthdate,
             email: req.body.email,
-            password: req.body.pswd
+            password: bcrypt.hashSync(req.body.pswd, 10),
+            fullaccess: false
         });
 
         newUser.save()
@@ -56,14 +58,20 @@ const newUser = async (req, res) => {
     }
 }
 
-const modifyUser = async (req, res) => {
+const modifyUser = async (req, res, userFind) => {
 
     try{
-        
+        const access = req.body.access 
+        ? (req.body.access === "1" ? true : false)
+        : userFind.fullaccess;
+
         const modifyUser = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
+            email: req.body.email,
             birthdate: req.body.birthdate,
+            password: userFind.password,
+            fullaccess: access
         };
 
         await User.updateOne({ _id: req.params.id}, { ...modifyUser})
@@ -81,21 +89,26 @@ const modifyUser = async (req, res) => {
     }
 }
 
-const modifyPassword = async (req, res) => {
+const modifyPassword = async (req, res, userFind) => {
 
     try{
         
         const modifyPassword = {
-            password: req.body.pswd,
+            firstname: userFind.firstname,
+            lastname: userFind.lastname,
+            email: userFind.email,
+            birthdate: userFind.birthdate,
+            password: bcrypt.hashSync(req.body.pswd, 10),
+            fullaccess: userFind.fullaccess
         };
 
         await User.updateOne({ _id: req.params.id}, { ...modifyPassword})
         .then(result => {
-            req.session.successUpdateUser = `Mot de passe de ${req.body.firstname} ${req.body.lastname} mis à jour avec succès.`;
+            req.session.successUpdatePassword = `Mot de passe de ${userFind.firstname} ${userFind.lastname} mis à jour avec succès.`;
             res.status(201).redirect(`/users/${req.params.id}/password/update`);
         })
         .catch(error => {
-            req.session.errorUpdateUser = `Erreur lors de la tentative de modification d'un mot de passe, ${error.message}.`;
+            req.session.errorUpdatePassword = `Erreur lors de la tentative de modification d'un mot de passe, ${error.message}.`;
             res.status(500).redirect(`/users/${req.params.id}/password/update`);
         });
     }
@@ -120,10 +133,11 @@ exports.listUsers = async (req, res, next) => {
             });
 
             const title = "Liste des utilisateurs";
+            const userConnected = req.session.userConnected ? req.session.userConnected : null;
             const successDeleteUser = req.session.successDeleteUser ? req.session.successDeleteUser : null;
             const errorUser = req.session.errorUser ? req.session.errorUser : null;
-
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/list-users.ejs"), { title, users, errorUser, successDeleteUser });
+            console.log(userConnected)
+            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/list-users.ejs"), { title, users, userConnected, errorUser, successDeleteUser });
         })
         .catch(error => console.log(error))
 
@@ -161,19 +175,24 @@ exports.createConfirmUser = async (req, res, next) => {
 
         verifInputs(req, res);
 
-        await findUserByMail(req)
-        .then(user => {
-            if(user) {
-                req.session.errorCreateUser = `Utilisateur ${user.date} existe déjà`;
-                res.status(401).redirect("/users/create");
-            } else {
-                newUser(req, res);
-            }
-        })
-        .catch(error => {
-            req.session.errorCreateUser = `Erreur lors de la recherche d'un utilisateur identique, ${error.message}.`;
-            res.status(500).redirect("/users/create");
-        })
+        if(req.body.pswd === req.body.pswdConfirm) {
+            await findUserByMail(req)
+            .then(user => {
+                if(user) {
+                    req.session.errorCreateUser = `Le mail ${user.email} est déjà enregistré`;
+                    res.status(401).redirect("/users/create");
+                } else {
+                    newUser(req, res);
+                }
+            })
+            .catch(error => {
+                req.session.errorCreateUser = `Erreur lors de la recherche d'un utilisateur identique, ${error.message}.`;
+                res.status(500).redirect("/users/create");
+            })
+        } else {
+            req.session.errorUser = `Les mots de passe ne sont pas identique`;
+            res.status(401).redirect(`/users/${req.params.id}/password/update`);
+        }
     }
     catch(error) {
         console.log("Try Error Create User Page : ", error);
@@ -192,9 +211,10 @@ exports.updateUser = async (req, res, next) => {
         .then(user => {
             if(user) {
                 const title = "Mettre à jour un utilisateur";
+                const userConnected = req.session.userConnected ? req.session.userConnected : null;
                 const errorUpdateUser = req.session.errorUpdateUser ? req.session.errorUpdateUser : null;
                 const successUpdateUser = req.session.successUpdateUser ? req.session.successUpdateUser : null;
-                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/update-user.ejs"), { title, user, errorUpdateUser, successUpdateUser });
+                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/update-user.ejs"), { title, user, userConnected, errorUpdateUser, successUpdateUser });
             } else {
                 req.session.errorUser = `User inexistant`;
                 res.status(401).redirect('/users');
@@ -224,7 +244,7 @@ exports.updateConfirmUser = async (req, res, next) => {
         await findUserById(req.params.id)
         .then(user => {
             if(user) {
-                modifyUser(req, res);
+                modifyUser(req, res, user);
             } else {
                 req.session.errorUser = `Utilisateur ${req.params.id} inexistant`;
                 res.status(401).redirect(`/users`);
@@ -285,7 +305,7 @@ exports.updateConfirmPassword = async (req, res, next) => {
             await findUserById(req.params.id)
             .then(user => {
                 if(user) {
-                    modifyPassword(req, res);
+                    modifyPassword(req, res, user);
                 } else {
                     req.session.errorUser = `Utilisateur ${req.params.id} inexistant`;
                     res.status(401).redirect(`/users`);
@@ -344,7 +364,7 @@ exports.deleteConfirmUser = async (req, res, next) => {
             } else {
                 user.deleteOne({ _id: req.params.id })
                 .then(() => {
-                    req.session.successDeleteUser = `Utilisateur ${user.date} supprimé avec succès.`;
+                    req.session.successDeleteUser = `Utilisateur ${user.firstname} ${user.lastname} supprimé avec succès.`;
                     req.session.errorUser = null;
                     res.redirect("/users");
                 })

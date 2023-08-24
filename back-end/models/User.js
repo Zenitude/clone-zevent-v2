@@ -25,6 +25,11 @@ const userSchema = mongoose.Schema({
         type: Date,
         required: true,
         trim: true
+    },
+    fullaccess: {
+        type: Boolean,
+        required: true,
+        trim: true
     }
 })
 

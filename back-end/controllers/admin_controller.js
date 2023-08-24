@@ -46,7 +46,12 @@ exports.login = async (req, res, next) => {
             const passwordVerify = bcrypt.compare(req.body.pswd, user.password)
             
             if(passwordVerify) {
-                req.session.userConnected = true;
+                req.session.userConnected = {
+                    id: user._id,
+                    email : user.email,
+                    fullname : `${user.lastname} ${user.firstname}`,
+                    access: user.fullaccess
+                };
 
                 const token = jwt.sign(
                     { userId: user._id },
