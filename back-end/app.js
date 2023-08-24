@@ -33,6 +33,7 @@ const adminRoutes = require('./routes/admin');
 const streamersRoutes = require('./routes/streamers');
 const historicsRoutes = require('./routes/historics');
 const usersRoutes = require('./routes/users');
+const gamesRoutes = require('./routes/games');
 
 connectDb();
 
@@ -58,6 +59,7 @@ app.use(adminRoutes);
 app.use(streamersRoutes);
 app.use(historicsRoutes);
 app.use(usersRoutes);
+app.use(gamesRoutes);
 
 app.use((req, res, next) => {
     try{
