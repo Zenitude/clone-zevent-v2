@@ -12,7 +12,7 @@
                     <h2>Êtes-vous sûr de vouloir supprimer ce streamer ?</h2>
 
                     <form action="/streamers/<%= streamer._id %>/delete?_method=DELETE" method="POST">
-                        <button class="back"><span>Annuler</span></button>
+                        <a href="/streamers"><span>Annuler</span></a>
                         <button><span>Confirmer</span></button>
                     </form>
                 <% } %>
@@ -22,7 +22,6 @@
 
         <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
         <script src="/scripts/header.js" type="text/js"></script>
-        <script src="/scripts/streamers.js" type="text/js"></script>
 
     </body>
 </html>

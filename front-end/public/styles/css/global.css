@@ -95,3 +95,16 @@ main {
 button {
     cursor: pointer;
 }
+
+.error, .success {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.success {
+    color: #05f671;
+}
+
+.error {
+    color: #ef0808;
+}

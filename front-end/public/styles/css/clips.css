@@ -210,3 +210,30 @@
 .nameAndActivity {
     text-align: center;
 }
+
+.clips article a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.clips article a img {
+    width: 100%;
+    height: 85%;
+    border-radius: 15px;
+    background: var(--thirdColor);
+    object-fit: cover;
+}
+
+.clips article a p {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clips article:hover a {
+    color: var(--thirdColor);
+    font-weight: bold;
+}

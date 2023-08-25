@@ -4,12 +4,10 @@
     <%- include('../../components/head.ejs'); %>
     
     <body>
-        <div class="container containerAdmin">
+        <div class="container containerListStreamer">
             <%- include('../../components/header.ejs'); %>
             <main>  
-                <h1>Liste des streamers</h1>
-                <a href="/streamers/create">Ajouter un streamer</a>
-
+                
                 <% if(errorStreamer && errorStreamer != null) { %>
                     <p><%= errorStreamer; %></p>
                 <% } %>
@@ -18,13 +16,26 @@
                     <p><%= successDeleteStreamer; %> </p>
                 <% } %>
 
+                <h1>Liste des streamers</h1>
+                <a href="/admin" class="back"><span>Dashboard</span></a>
+                <a href="/streamers/create" class="create"><span>Ajouter un streamer</span></a>
+
                 <% if(streamers) { %>
                     <table>
                         <% streamers.forEach(streamer => { %>
                             <tr>
+                                <td><img src="/images/streamers/<%= streamer.name.toLowerCase().split(' ').join('-') %>.webp" alt="avatar de <%= streamer.name; %>"></td>
                                 <td><%= streamer.name; %></td>
-                                <td><a href=<%= `/streamers/${streamer._id}/update`; %>>Modifier</a></td>
-                                <td><a href=<%= `/streamers/${streamer._id}/delete`; %>>Supprimer</a></td>
+                                <td class="update">
+                                    <a href=<%= `/streamers/${streamer._id}/update`; %>>
+                                        <img src="/images/crud/update.webp" alt="Modifier les données de <%= streamer.name %>">
+                                    </a>
+                                </td>
+                                <td class="delete">
+                                    <a href=<%= `/streamers/${streamer._id}/delete`; %>>
+                                        <img src="/images/crud/delete.webp" alt="Supprimer les données de <%= streamer.name %>">
+                                    </a>
+                                </td>
                             </tr>
                         <% }) %>
                     </table>

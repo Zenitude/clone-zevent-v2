@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerUpdateHistoric">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <main>  
+
+                    <% if(errorUpdateHistoric && errorUpdateHistoric != null) { %>
+                        <p><%= errorUpdateHistoric %></p>
+                    <% } %>
+    
+                    <% if(successUpdateHistoric && successUpdateHistoric != null) { %>
+                        <p><%= successUpdateHistoric %></p>
+                    <% } %>
+    
+                    <h1>Mise à jour de l'historique <%= historic ? historic.date : '' %></h1>
+    
+                    <form action="/historics/<%= historic._id %>/update/modify?_method=PUT" method="POST" enctype="multipart/form-data">
+    
+                        <div>
+                            <input type="text" name="dates" id="dates" autocomplete="off" value="<%= historic ? historic.date : '' %>"/>
+                            <label for="dates">Dates</label>
+                        </div>
+    
+                        <div>
+                            <input type="text" name="amount" id="amount" autocomplete="off" value="<%= historic ? historic.amount : '' %>"/>
+                            <label for="amount">Montant</label>
+                        </div>
+    
+                        
+                        <div>
+                            <input type="text" name="associations" id="associations" autocomplete="off" value="<%= historic ? historic.associations : '' %>"/>
+                            <label for="associations">Associations</label>
+                        </div>
+    
+                        <button><span>Mettre à jour</span></button>
+                    </form>
+    
+                    <a href="/historics">Revenir à la liste des historiques</a>
+    
+                </main>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

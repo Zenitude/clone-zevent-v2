@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerCreateGame">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <% if(errorCreateGame && errorCreateGame != null) { %>
+                    <p><%= errorCreateGame %></p>
+                <% } %>
+
+                <% if(successCreateGame && successCreateGame != null) { %>
+                    <p><%= successCreateGame %></p>
+                <% } %>
+
+                <h1>Ajouter un Jeu</h1>
+
+                <form action="/games/create/add" method="POST" enctype="multipart/form-data">
+
+                    <div>
+                        <input type="text" name="name" id="name" autocomplete="off" />
+                        <label for="name">Nom</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="link" id="link" autocomplete="off" />
+                        <label for="link">Lien page officiel</label>
+                    </div>
+
+                    <div>
+                        <input type="file" name="file" id="file" autocomplete="off" />
+                        <label for="file">Image</label>
+                    </div>
+
+                    <button><span>Ajouter</span></button>
+                </form>
+
+                <a href="/games">Revenir à la liste des Jeux</a>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

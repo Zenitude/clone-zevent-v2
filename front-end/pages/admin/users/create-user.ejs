@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerCreateUser">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <% if(errorCreateUser && errorCreateUser != null) { %>
+                    <p><%= errorCreateUser %></p>
+                <% } %>
+
+                <% if(successCreateUser && successCreateUser != null) { %>
+                    <p><%= successCreateUser %></p>
+                <% } %>
+
+                <h1>Ajouter un utilisateur</h1>
+
+                <form action="/users/create/add" method="POST" enctype="multipart/form-data">
+
+                    <div>
+                        <input type="text" name="lastname" id="lastname" autocomplete="off" />
+                        <label for="lastname">Nom</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="firstname" id="firstname" autocomplete="off" />
+                        <label for="firstname">Prénom</label>
+                    </div>
+
+                    <div>
+                        <input type="email" name="email" id="email" autocomplete="off" />
+                        <label for="email">E-mail</label>
+                    </div>
+
+                    <div>
+                        <input type="password" name="pswd" id="pswd" autocomplete="off" />
+                        <label for="pswd">Création du Mot de passe</label>
+                    </div>
+
+                    <div>
+                        <input type="password" name="pswdConfirm" id="pswdConfirm" autocomplete="off" />
+                        <label for="pswdConfirm">Confirmation du Mot de passe</label>
+                    </div>
+
+                    <div>
+                        <input type="date" name="birthdate" id="birthdate" autocomplete="off" />
+                        <label for="birthdate">Date de naissance</label>
+                    </div>
+
+                    <button><span>Ajouter</span></button>
+                </form>
+
+                <a href="/users">Revenir à la liste des utilisateurs</a>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

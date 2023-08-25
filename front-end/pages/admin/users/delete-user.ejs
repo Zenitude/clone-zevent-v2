@@ -4,15 +4,15 @@
     <%- include('../../components/head.ejs'); %>
     
     <body>
-        <div class="container containerDeleteGame">
+        <div class="container containerDeleteUser">
             <%- include('../../components/header.ejs'); %>
             <main>  
-                <% if(game) { %>
-                    <h1>Suppression de <%= game.name %></h1>
-                    <h2>Êtes-vous sûr de vouloir supprimer cet historique ?</h2>
+                <% if(user) { %>
+                    <h1>Suppression de <%= user.lastname + ' ' + user.firstname %></h1>
+                    <h2>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</h2>
 
-                    <form action="/games/<%= game._id %>/delete?_method=DELETE" method="POST">
-                        <a href="/games"><span>Annuler</span></a>
+                    <form action="/users/<%= user._id %>/delete?_method=DELETE" method="POST">
+                        <a href="/users"><span>Annuler</span></a>
                         <button><span>Confirmer</span></button>
                     </form>
                 <% } %>

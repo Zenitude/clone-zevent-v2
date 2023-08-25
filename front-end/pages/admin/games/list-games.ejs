@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerListGame">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+                <h1>Liste des Jeux</h1>
+                <a href="/admin" class="back"><span>Dashboard</span></a>
+                <a href="/games/create" class="create"><span>Ajouter un jeu</span></a>
+
+                <% if(errorGame && errorGame != null) { %>
+                    <p><%= errorGame; %></p>
+                <% } %>
+
+                <% if(successDeleteGame && successDeleteGame != null) { %>
+                    <p><%= successDeleteGame; %> </p>
+                <% } %>
+
+                <% if(games) { %>
+                    <table>
+                        
+                        <% games.forEach(game => { %>
+                            <tr>
+                                <td><%= game.name; %></td>
+                                <td class="update">
+                                    <a href=<%= `/games/${game._id}/update`; %>>
+                                        <img src="/images/crud/update.webp" alt="Modifier les données de <%= game.name %>">
+                                    </a>
+                                </td>
+                                <td class="delete">
+                                    <a href=<%= `/games/${game._id}/delete`; %>>
+                                        <img src="/images/crud/delete.webp" alt="Supprimer les données de <%= game.name %>">
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                <% } else { %>
+                    <p>Aucun Jeu recensé pour le moment !</p>
+                <% } %>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

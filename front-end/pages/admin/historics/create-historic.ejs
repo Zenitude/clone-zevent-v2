@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerCreateHistoric">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <% if(errorCreateHistoric && errorCreateHistoric != null) { %>
+                    <p><%= errorCreateHistoric %></p>
+                <% } %>
+
+                <% if(successCreateHistoric && successCreateHistoric != null) { %>
+                    <p><%= successCreateHistoric %></p>
+                <% } %>
+
+                <h1>Ajouter un historique</h1>
+
+                <form action="/historics/create/add" method="POST" enctype="multipart/form-data">
+
+                    <div>
+                        <input type="text" name="dates" id="dates" autocomplete="off" />
+                        <label for="dates">Dates</label>
+                    </div>
+
+                    <div>
+                        <input type="text" name="amount" id="amount" autocomplete="off" />
+                        <label for="amount">Montant</label>
+                    </div>
+
+                    
+                    <div>
+                        <input type="text" name="associations" id="associations" autocomplete="off" />
+                        <label for="associations">Associations</label>
+                    </div>
+
+                    <button><span>Ajouter</span></button>
+                </form>
+
+                <a href="/historics">Revenir à la liste des historiques</a>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

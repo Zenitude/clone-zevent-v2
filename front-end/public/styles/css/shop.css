@@ -323,6 +323,7 @@
 
 /* Help */
 .containerShop .help {
+    max-width: 1430px;
     min-width: 250px;
     min-height: 400px;
     display: grid;
@@ -332,6 +333,7 @@
     border-radius: 15px;
     overflow: hidden;
     filter: drop-shadow(0 0 2px var(--secondaryColor));
+    margin: 0 auto;
 }
 
 .containerShop .help .containerImg {

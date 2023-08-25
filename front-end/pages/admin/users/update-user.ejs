@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerUpdateUser">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <main>  
+
+                    <% if(errorUpdateUser && errorUpdateUser != null) { %>
+                        <p class="error"><%= errorUpdateUser %></p>
+                    <% } %>
+    
+                    <% if(successUpdateUser && successUpdateUser != null) { %>
+                        <p class="success"><%= successUpdateUser %></p>
+                    <% } %>
+    
+                    <h1>Mise à jour de l'utilisateur <%= user ? user.lastname + ' ' + user.firstname : '' %></h1>
+    
+                    <form action="/users/<%= user._id %>/update/modify?_method=PUT" method="POST" enctype="multipart/form-data">
+    
+                        <div>
+                            <input type="text" name="lastname" id="lastname" autocomplete="off" value="<%= user ? user.lastname : '' %>"/>
+                            <label for="lastname">Nom</label>
+                        </div>
+    
+                        <div>
+                            <input type="text" name="firstname" id="firstname" autocomplete="off" value="<%= user ? user.firstname : '' %>"/>
+                            <label for="firstname">Prénom</label>
+                        </div>
+    
+                        <div>
+                            <input type="email" name="email" id="email" autocomplete="off" value="<%= user ? user.email : '' %>"/>
+                            <label for="email">E-mail</label>
+                        </div>
+    
+                        <div>
+                            <% 
+                                const date = user.birthdate;
+                                const month = date.getMonth() + 1;
+                                const birthdate = `${date.getFullYear()}-${month < 10 ? `0${month}` : month }-${date.getDate()}`
+                            %>
+                            <input type="date" name="birthdate" id="birthdate" autocomplete="off" value="<%= user ? birthdate : '' %>"/>
+                            <label for="birthdate">Date de naissance</label>
+                        </div>
+
+                        <% if(userConnected && userConnected.access) { %>
+                            <div>
+                                <select name="access" id="access">
+                                    <option value="1" <%= user.fullaccess === true ? "selected" : "" %>>Complet</option>
+                                    <option value="0" <%= user.fullaccess === false ? "selected" : "" %>>Restreint</option>
+                                </select>
+                                <label for="access">Niveau d'accès</label>
+                            </div>
+                        <% } %>
+    
+                        <button><span>Mettre à jour</span></button>
+                    </form>
+    
+                    <a href="/users">Revenir à la liste des utilisateurs</a>
+    
+                </main>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

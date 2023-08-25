@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerUpdateGame">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+
+                <main>  
+
+                    <% if(errorUpdateGame && errorUpdateGame != null) { %>
+                        <p><%= errorUpdateGame %></p>
+                    <% } %>
+    
+                    <% if(successUpdateGame && successUpdateGame != null) { %>
+                        <p><%= successUpdateGame %></p>
+                    <% } %>
+    
+                    <h1>Mise à jour du jeu <%= game ? game.name : '' %></h1>
+    
+                    <% if(game) { %>
+                        <% 
+                            let linkImage = game.name.replace(':', 'µ');
+                            linkImage = linkImage.toLowerCase().split(' ').join('-');
+                        %>
+                        <img src="/images/games/<%= linkImage %>.webp" alt="avatar de <%= game.name %>" />
+                    <% } %>
+
+                    <form action="/games/<%= game._id %>/update/modify?_method=PUT" method="POST" enctype="multipart/form-data">
+    
+                        <div>
+                            <input type="text" name="name" id="name" autocomplete="off" value="<%= game ? game.name : '' %>"/>
+                            <label for="name">Nom</label>
+                        </div>
+    
+                        <div>
+                            <input type="text" name="link" id="link" autocomplete="off" value="<%= game ? game.link : '' %>"/>
+                            <label for="link">Lien page officiel</label>
+                        </div>
+
+                        <div>
+                            <input type="file" name="file" id="file" autocomplete="off" />
+                            <label for="file">Image</label>
+                        </div>
+    
+                        <button><span>Mettre à jour</span></button>
+                    </form>
+    
+                    <a href="/games">Revenir à la liste des jeux</a>
+    
+                </main>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

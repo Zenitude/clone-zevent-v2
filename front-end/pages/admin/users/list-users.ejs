@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <%- include('../../components/head.ejs'); %>
+    
+    <body>
+        <div class="container containerListUser">
+            <%- include('../../components/header.ejs'); %>
+            <main>  
+                <h1>Liste des utilisateurs</h1>
+                <a href="/admin" class="back"><span>Dashboard</span></a>
+                <a href="/users/create" class="create"><span>Ajouter un utilisateur</span></a>
+
+                <% if(errorUser && errorUser != null) { %>
+                    <p class="error"><%= errorUser; %></p>
+                <% } %>
+
+                <% if(successDeleteUser && successDeleteUser != null) { %>
+                    <p class="success"><%= successDeleteUser; %> </p>
+                <% } %>
+
+                <% if(users) { %>
+                    <table>
+                        
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.lastname + ' ' + user.firstname; %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.birthdate.toLocaleDateString() %></td>
+                                <td class="update">
+                                    <a href=<%= `/users/${user._id}/update`; %>>
+                                        <img src="/images/crud/update.webp" alt="Modifier les données de <%= user.lastname + ' ' + user.firstname %>">
+                                    </a>
+                                </td>
+                                    
+                                <% if(userConnected && (userConnected.id.toString() === user._id.toString() || userConnected.access)) { %>
+                                    <td class="password">
+                                        <a href=<%= `/users/${user._id}/password/update`; %>>
+                                            <img src="/images/crud/password.webp" alt="Modifier le mot de passe de <%= user.lastname + ' ' + user.firstname %>">
+                                        </a>
+                                    </td>
+                                <% } %>
+
+                                <td class="delete">
+                                    <a href=<%= `/users/${user._id}/delete`; %>>
+                                        <img src="/images/crud/delete.webp" alt="Supprimer les données de <%= user.lastname + ' ' + user.firstname %>">
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </table>
+                <% } else { %>
+                    <p>Aucun utilisateur recensé pour le moment !</p>
+                <% } %>
+
+            </main>
+        </div>
+
+        <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
+        <script src="/scripts/header.js"></script>
+
+    </body>
+</html>

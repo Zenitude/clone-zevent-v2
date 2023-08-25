@@ -376,19 +376,21 @@
                 <section class="games">
                     <h1>Les jeux</h1>
                     <div class="clips">
-                        <article>
-                            <a href="">
-                                <img src="" alt="">
-                                <p>Nom du jeu</p>
-                            </a>
-                        </article>
-                        <% for(let i = 0; i < 24 ; i++) { %>
-                            <article>
-                                <a href="">
-                                    <img src="" alt="">
-                                    <p>Nom du jeu</p>
-                                </a>
-                            </article>
+                        <% if(games) { %>
+                            <% for(let i = 0; i < games.length ; i++) { %>
+                                <article>
+                                    <a href=<%= games[i].link %>>
+                                        <% 
+                                            let linkImage = games[i].name
+                                            linkImage = linkImage.replace(':', 'µ');
+                                            linkImage = linkImage.toLowerCase().split(' ').join('-');
+                                            console.log(linkImage)
+                                        %>
+                                        <img src=<%= `/images/games/${linkImage}.webp` %> alt="Lien vers la page officiel de <%= games[i].name %>">
+                                        <p><%= games[i].name %></p>
+                                    </a>
+                                </article>
+                            <% } %>
                         <% } %>
                     </div>
                 </section>
