@@ -1,0 +1,236 @@
+/* Clips global */
+.containerClips main {
+    width: 100%;
+    max-width: auto;
+    padding: 10px;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    display: none;
+    position: absolute;
+    top: 120px;
+    z-index: 2;
+    background: var(--streamers);
+    padding: 25px;
+    width: 98%;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: inset 0 0 15px var(--thirdColor);
+}
+
+.sidebar.active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar nav {
+    margin-bottom: auto;
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar a {
+    background-color: var(--thirdColor);
+    width: 100%;
+}
+
+.sidebar button {
+    background-color: transparent;
+    color: var(--thirdColor);  
+    border: none;
+}
+
+.sidebar :is(a, button) {
+    font-size: 1.3rem;
+    padding: 10px 0;
+    border-radius: 15px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.sidebar :is(a:is(:hover, .active), button:is(:hover, .active)) {
+    background-color: var(--secondaryColor);
+    border: 1px solid var(--thirdColor);
+    color: var(--thirdColor);
+}
+
+.containerClips .sidebar ul {
+    list-style-type: none;
+}
+
+/* buttons Tab */
+.containerClips .buttonTabsClips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 260px;
+    gap: 10px;
+    background-color: var(--streamers);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.containerClips .buttonTabsClips button {
+    background-color: transparent;
+    border: none;
+    color: var(--thirdColor);
+    font-size: 1.2rem;
+}
+
+.containerClips .buttonTabsClips button:first-of-type {
+    width: 50px;
+    height: 50px;
+    border-right: 2px solid var(--thirdColor);
+}
+
+.containerClips .buttonTabsClips button:first-of-type img {
+    width: 70%;
+    height: 70%;
+}
+
+.containerClips .buttonTabsClips button:first-of-type img:last-of-type {
+    display: none;
+}
+
+.containerClips .buttonTabsClips button.activeSide:first-of-type img:last-of-type {
+    display: inline-block;
+}
+
+.containerClips .buttonTabsClips button.activeSide:first-of-type img:first-of-type {
+    display: none;
+}
+
+.buttonTabsClips button.active, .buttonTabsClips button:hover {
+    border: 1px solid var(--thirdColor);
+    background: var(--secondaryColor);
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.buttonTabsClips button.active span {
+    filter: drop-shadow(0 0 2px #000);
+}
+
+/* Tabs */
+.containerClips section {
+    display: none;
+}
+
+.containerClips section.active {
+    display: block;
+}
+
+.containerClips section h1 {
+    text-align: start;
+}
+
+/* Clips */
+.clips {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.clips article {
+    min-width: 260px;
+    min-height: 350px;
+    padding: 0 0 10px;
+    border-radius: 15px;
+    color: var(--thirdColor);
+    background-color: var(--streamers);
+}
+
+.clips article:hover
+{
+    background-color: var(--secondaryColor);
+    color: var(--streamers);
+    box-shadow: 0 0 5px var(--secondaryColor);
+}
+
+.clips article video {
+    width: 100%;
+    height: 200px;
+    padding: 0;
+    border-radius: 15px;
+}
+
+.clips article img {
+    width: 50px;
+    height: 50px;
+}
+
+.viewsAndTime {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.viewsAndTime span {
+    border: 1px solid var(--thirdColor);
+    padding: 5px;
+    font-size: 0.75em;
+}
+
+.clips article:hover .viewsAndTime span {
+    border: 1px solid var(--primaryColor);
+}
+
+.clips article .avatarAndTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+.clips article .avatarAndTitle h3 {
+    text-align: start;
+    font-size: 1.2em;
+}
+
+.clips article:hover .avatarAndTitle h3 {
+    color: var(--primaryColor);
+}
+
+.nameAndActivity {
+    text-align: center;
+}
+
+.clips article a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.clips article a img {
+    width: 100%;
+    height: 85%;
+    border-radius: 15px;
+    background: var(--thirdColor);
+    object-fit: cover;
+}
+
+.clips article a p {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clips article:hover a {
+    color: var(--thirdColor);
+    font-weight: bold;
+}
