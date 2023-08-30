@@ -19,7 +19,7 @@
                     <p class="success"><%= successDeleteUser; %> </p>
                 <% } %>
 
-                <% if(users) { %>
+                <% if(users && users.length > 0) { %>
                     <table>
                         
                         <% users.forEach(user => { %>
@@ -49,6 +49,25 @@
                             </tr>
                         <% }) %>
                     </table>
+                    <% if(page && maxPage > 1) { %>
+                        <div class="switchPage">
+                            <a href="/users?page=1" aria-label="première page">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <a href=<%= `/users?page=${previousPage}`%> aria-label="page précédente">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <span><%= page %></span>
+                            <a href=<%= `/users?page=${nextPage}`%> aria-label="page suivante">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                            <a href=<%= `/users?page=${maxPage}`%> aria-label="dernière page">
+                                <i class="fa-solid fa-chevron-right"></i>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    <% } %>
                 <% } else { %>
                     <p>Aucun utilisateur recensé pour le moment !</p>
                 <% } %>

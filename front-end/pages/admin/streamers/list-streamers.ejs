@@ -20,7 +20,7 @@
                 <a href="/admin" class="back"><span>Dashboard</span></a>
                 <a href="/streamers/create" class="create"><span>Ajouter un streamer</span></a>
 
-                <% if(streamers) { %>
+                <% if(streamers && streamers.length > 0) { %>
                     <table>
                         <% streamers.forEach(streamer => { %>
                             <tr>
@@ -39,6 +39,25 @@
                             </tr>
                         <% }) %>
                     </table>
+                    <% if(page && maxPage > 1) { %>
+                        <div class="switchPage">
+                            <a href="/streamers?page=1" aria-label="première page">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <a href=<%= `/streamers?page=${previousPage}`%> aria-label="page précédente">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <span><%= page %></span>
+                            <a href=<%= `/streamers?page=${nextPage}`%> aria-label="page suivante">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                            <a href=<%= `/streamers?page=${maxPage}`%> aria-label="dernière page">
+                                <i class="fa-solid fa-chevron-right"></i>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    <% } %>
                 <% } else { %>
                     <p>Aucun streamer recensé pour le moment !</p>
                 <% } %>

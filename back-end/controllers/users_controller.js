@@ -18,10 +18,6 @@ const verifInputs = async (req, res) => {
     }
 }
 
-const findUsers = async () => {
-    return await User.find();
-}
-
 const findUserById = async (id) => {
     return await User.findOne({ _id: id });
 }
@@ -124,23 +120,20 @@ exports.listUsers = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        await findUsers()
-        .then(users => {
-            users.sort((a, b) => {
-                if(a.lastname < b.lastname) { return -1 }
-                else if(a.lastname > b.lastname) { return 1 }
-                else { return 0 }
-            });
-
-            const title = "Liste des utilisateurs";
-            const userConnected = req.session.userConnected ? req.session.userConnected : null;
-            const successDeleteUser = req.session.successDeleteUser ? req.session.successDeleteUser : null;
-            const errorUser = req.session.errorUser ? req.session.errorUser : null;
-            console.log(userConnected)
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/list-users.ejs"), { title, users, userConnected, errorUser, successDeleteUser });
-        })
-        .catch(error => console.log(error))
-
+        let page = parseInt(req.query.page);
+        const totalUsers = await User.countDocuments();
+        const limit = 8;
+        const maxPage = Math.ceil(totalUsers / limit);
+        const nextPage = page + 1 > maxPage ? 1 : page + 1;
+        const previousPage = page - 1 < 1 ? maxPage : page - 1;
+        const skip = (page - 1 ) * limit;
+        const title = "Liste des administrateurs";
+        const successDeleteUser = req.session.successDeleteUser ? req.session.successDeleteUser : null;
+        const errorUser = req.session.errorUser ? req.session.errorUser : null;
+        const userConnected = req.session.userConnected ? req.session.userConnected : null;
+        const users = await User.find().sort({lastname: 1, firstname: 1}).skip(skip).limit(limit);
+        
+        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/list-users.ejs"), { title, users, userConnected, page, maxPage, previousPage, nextPage, errorUser, successDeleteUser });
     }
     catch(error) {
         console.log("Try Error List Userss Page : ", error);

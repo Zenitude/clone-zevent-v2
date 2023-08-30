@@ -14,10 +14,6 @@ const verifInputs = async (req, res) => {
     }
 }
 
-const findHistorics = async () => {
-    return await Historic.find();
-}
-
 const findHistoricById = async (id) => {
     return await Historic.findOne({ _id: id });
 }
@@ -83,21 +79,19 @@ exports.listHistorics = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        await findHistorics()
-        .then(historics => {
-            historics.sort((a, b) => {
-                if(a.date < b.date) { return -1 }
-                else if(a.date > b.date) { return 1 }
-                else { return 0 }
-            });
-
-            const title = "Liste des historiques";
-            const successDeleteHistoric = req.session.successDeleteHistoric ? req.session.successDeleteHistoric : null;
-            const errorHistoric = req.session.errorHistoric ? req.session.errorHistoric : null;
-
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/historics/list-historics.ejs"), { title, historics, errorHistoric, successDeleteHistoric });
-        })
-        .catch(error => console.log(error))
+        let page = parseInt(req.query.page);
+        const totalHistorics = await Historic.countDocuments();
+        const limit = 8;
+        const maxPage = Math.ceil(totalHistorics / limit);
+        const nextPage = page + 1 > maxPage ? 1 : page + 1;
+        const previousPage = page - 1 < 1 ? maxPage : page - 1;
+        const skip = (page - 1 ) * limit;
+        const title = "Liste des historiques";
+        const successDeleteHistoric = req.session.successDeleteHistoric ? req.session.successDeleteHistoric : null;
+        const errorHistoric = req.session.errorHistoric ? req.session.errorHistoric : null;
+        const historics = await Historic.find().skip(skip).limit(limit);
+        
+        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/historics/list-historics.ejs"), { title, historics, page, maxPage, previousPage, nextPage, errorHistoric, successDeleteHistoric });
 
     }
     catch(error) {

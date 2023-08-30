@@ -15,10 +15,6 @@ const verifInputs = async (req, res) => {
     }
 }
 
-const findStreamers = async () => {
-    return await Streamer.find();
-}
-
 const findStreamerById = async (id) => {
     return await Streamer.findOne({ _id: id });
 }
@@ -163,21 +159,19 @@ exports.listStreamers = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        await findStreamers()
-        .then(streamers => {
-            streamers.sort((a, b) => {
-                if(a.name < b.name) { return -1 }
-                else if(a.name > b.name) { return 1 }
-                else { return 0 }
-            });
-
-            const title = "Liste des streamers";
-            const successDeleteStreamer = req.session.successDeleteStreamer ? req.session.successDeleteStreamer : null;
-            const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
-
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/list-streamers.ejs"), { title, streamers, errorStreamer, successDeleteStreamer });
-        })
-        .catch(error => console.log(error))
+        let page = parseInt(req.query.page);
+        const totalStreamers = await Streamer.countDocuments();
+        const limit = 8;
+        const maxPage = Math.ceil(totalStreamers / limit);
+        const nextPage = page + 1 > maxPage ? 1 : page + 1;
+        const previousPage = page - 1 < 1 ? maxPage : page - 1;
+        const skip = (page - 1 ) * limit;
+        const title = "Liste des streamers";
+        const successDeleteStreamer = req.session.successDeleteStreamer ? req.session.successDeleteStreamer : null;
+        const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
+        const streamers = await Streamer.find().sort({name: -1}).skip(skip).limit(limit);
+        
+        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/list-streamers.ejs"), { title, streamers, page, maxPage, previousPage, nextPage, errorStreamer, successDeleteStreamer });
 
     }
     catch(error) {

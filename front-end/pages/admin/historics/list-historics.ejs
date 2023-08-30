@@ -19,7 +19,7 @@
                     <p><%= successDeleteHistoric; %> </p>
                 <% } %>
 
-                <% if(historics) { %>
+                <% if(historics && historics.length > 0) { %>
                     <table>
                         
                         <% historics.forEach(historic => { %>
@@ -38,6 +38,25 @@
                             </tr>
                         <% }) %>
                     </table>
+                    <% if(page && maxPage > 1) { %>
+                        <div class="switchPage">
+                            <a href="/historics?page=1" aria-label="première page">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <a href=<%= `/historics?page=${previousPage}`%> aria-label="page précédente">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                            <span><%= page %></span>
+                            <a href=<%= `/historics?page=${nextPage}`%> aria-label="page suivante">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                            <a href=<%= `/historics?page=${maxPage}`%> aria-label="dernière page">
+                                <i class="fa-solid fa-chevron-right"></i>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    <% } %>
                 <% } else { %>
                     <p>Aucun historique recensé pour le moment !</p>
                 <% } %>

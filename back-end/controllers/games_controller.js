@@ -15,10 +15,6 @@ const verifInputs = async (req, res) => {
     }
 }
 
-const findGames = async () => {
-    return await Game.find();
-}
-
 const findGameById = async (id) => {
     return await Game.findOne({ _id: id });
 }
@@ -164,21 +160,19 @@ exports.listGames = async (req, res, next) => {
             res.status(200).redirect("/");
         }
 
-        await findGames()
-        .then(games => {
-            games.sort((a, b) => {
-                if(a.name < b.name) { return -1 }
-                else if(a.name > b.name) { return 1 }
-                else { return 0 }
-            });
-
-            const title = "Liste des jeux";
-            const successDeleteGame = req.session.successDeleteGame ? req.session.successDeleteGame : null;
-            const errorGame = req.session.errorGame ? req.session.errorGame : null;
-
-            res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/games/list-games.ejs"), { title, games, errorGame, successDeleteGame });
-        })
-        .catch(error => console.log(error))
+        let page = parseInt(req.query.page);
+        const totalGames = await Game.countDocuments();
+        const limit = 8;
+        const maxPage = Math.ceil(totalGames / limit);
+        const nextPage = page + 1 > maxPage ? 1 : page + 1;
+        const previousPage = page - 1 < 1 ? maxPage : page - 1;
+        const skip = (page - 1 ) * limit;
+        const title = "Liste des jeux";
+        const successDeleteGame = req.session.successDeleteGame ? req.session.successDeleteGame : null;
+        const errorGame = req.session.errorGame ? req.session.errorGame : null;
+        const games = await Game.find().sort({name: 1}).skip(skip).limit(limit);
+        
+        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/games/list-games.ejs"), { title, games, page, maxPage, previousPage, nextPage, errorGame, successDeleteGame });
 
     }
     catch(error) {
