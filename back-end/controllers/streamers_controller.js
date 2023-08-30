@@ -169,7 +169,7 @@ exports.listStreamers = async (req, res, next) => {
         const title = "Liste des streamers";
         const successDeleteStreamer = req.session.successDeleteStreamer ? req.session.successDeleteStreamer : null;
         const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
-        const streamers = await Streamer.find().sort({name: -1}).skip(skip).limit(limit);
+        const streamers = await Streamer.find().sort({name: 1}).skip(skip).limit(limit);
         
         res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/streamers/list-streamers.ejs"), { title, streamers, page, maxPage, previousPage, nextPage, errorStreamer, successDeleteStreamer });
 
