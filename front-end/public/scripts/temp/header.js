@@ -1,66 +1,65 @@
-const header = document.querySelector('header');
+const header = document.querySelector('.classicHeader');
+const pathname = document.location.pathname.replace('/', '');
 
-let pathname = document.location.pathname;
-pathname = pathname.includes('index.html') ? pathname.replace('/front-end/', '') : pathname.replace('/front-end/pages/', '');
-pathname = pathname.replace('.html', '');
-
-header.innerHTML = `
-<div class="navigationHeader">
-        <nav>
-            <ul>
-                <li>
-                    <a href="/">
-                        <img src="/images/zevent/zevent-logo-105x60.webp" alt="Link for go to Home page" />
-                    </a>
-                </li>
-                <li>
-                    <a href="/" aria-label="Link for go to Home page">
-                        <span>Accueil</span>
-                        <i class="fa-solid fa-house fa-2x"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/associations" aria-label="Link for go to Associations page">
-                        <span>Les associations</span>
-                        <i class="fa-solid fa-building fa-2x"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/clips" aria-label="Link for go to Clips page">
-                        <span>Les clips</span>
-                        <i class="fa-brands fa-square-youtube fa-2x"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/stats" aria-label="Link for go to Statistics page">
-                        <span>Les stats</span>
-                        <i class="fa-solid fa-bars-progress fa-2x"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="menu">
-            <img src="/images/header/hamburger.svg" alt="Afficher menu" class="hamburger active" />
-            <img src="/images/header/close.svg" alt="Fermer menu" class="close" />
+if(header) {
+    header.innerHTML = `
+    <div class="navigationHeader">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">
+                            <img src="/images/zevent/zevent-logo-105x60.webp" alt="Link for go to Home page" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/" aria-label="Link for go to Home page">
+                            <span>Accueil</span>
+                            <i class="fa-solid fa-house fa-2x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/associations" aria-label="Link for go to Associations page">
+                            <span>Les associations</span>
+                            <i class="fa-solid fa-building fa-2x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/clips" aria-label="Link for go to Clips page">
+                            <span>Les clips</span>
+                            <i class="fa-brands fa-square-youtube fa-2x"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/stats" aria-label="Link for go to Statistics page">
+                            <span>Les stats</span>
+                            <i class="fa-solid fa-bars-progress fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="menu">
+                <img src="/images/header/hamburger.svg" alt="Afficher menu" class="hamburger active" />
+                <img src="/images/header/close.svg" alt="Fermer menu" class="close" />
+            </div>
         </div>
-    </div>
+        
+        <div class="networksHeader">
+            <nav>
+                <ul>
+                    <li><a href="https://twitter.com/ZEventfr" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/zeventfr/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://www.reddit.com/r/ZEvent/" aria-label="Reddit"><i class="fa-brands fa-reddit-alien"></i></a></li>
+                </ul>
+            </nav>
+        </div>
     
-    <div class="networksHeader">
-        <nav>
-            <ul>
-                <li><a href="https://twitter.com/ZEventfr" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                <li><a href="https://www.instagram.com/zeventfr/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                <li><a href="https://www.reddit.com/r/ZEvent/" aria-label="Reddit"><i class="fa-brands fa-reddit-alien"></i></a></li>
-            </ul>
-        </nav>
-    </div>
+    `;
+}
 
-`;
-
-const navHeader = document.querySelector('.navigationHeader ul');
+const navHeader = document.querySelector('header .navigationHeader ul');
 if(navHeader) {
-    if(pathname === 'shop') {
-        document.querySelector('.navigationHeader ul').innerHTML += `
+    if(pathname == 'shop') {
+        navHeader.innerHTML += `
         <li class="cart">
         <a href="/cart" aria-label="Link for go to Statistics page">
             <svg 
@@ -78,7 +77,7 @@ if(navHeader) {
 if(document.querySelector('.menu')) {
     const menu = document.querySelector('.menu');
     const [iconHamburger, iconClose] = document.querySelectorAll('.menu img');
-    const links = document.querySelectorAll('.navigationHeader nav li:not(.navigationHeader nav li:first-of-type, .navigationHeader nav li.cart)');
+    const links = document.querySelectorAll('header .navigationHeader nav li:not(:first-of-type, .cart)');
     
     menu.addEventListener('click', () => {
         iconHamburger.classList.toggle('active');
@@ -86,7 +85,3 @@ if(document.querySelector('.menu')) {
         links.forEach(link => link.classList.toggle('active'));
     });
 }
-
-const data = new Date();
-const date = data.toLocaleDateString();
-const hours = data.toLocaleTimeString();

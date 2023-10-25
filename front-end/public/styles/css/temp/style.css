@@ -1183,7 +1183,7 @@ header {
 }
 
 .containerShop .help .containerImg {
-    background: url('../../assets/images/shop/help/help.webp') no-repeat center;
+    background: url('/images/shop/help/help.webp') no-repeat center;
     background-size: cover;
     width: 100%;
     min-width: 240px;
@@ -1530,6 +1530,10 @@ header {
 }
 
 /* List */
+body.containerList {
+    overflow-x: hidden;
+}
+
 [class*="containerList"] a:is(.create, .back) {
     width: 250px;
     padding: 10px 15px;
@@ -1553,9 +1557,15 @@ header {
     justify-content: center;
 }
 
+.containerTableList {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 [class*="containerList"] table {
     border-collapse: collapse;
     margin: 25px auto 0;
+    white-space: nowrap;
 }
 
 [class*="containerList"] table td {
