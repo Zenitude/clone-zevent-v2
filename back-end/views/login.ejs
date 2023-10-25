@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
 <html lang="fr">
-    <%- include('../components/head.ejs'); %>
+    <%- include('./components/head.ejs'); %>
     
     <body>
         <div class="container containerLogin">
-            <%- include('../components/header.ejs'); %>
+            <%- include('./components/header.ejs'); %>
             <main>
                     <% if(errorFindUser) { %>
                         <p><%= errorFindUser %></p>
                     <% } %>
-                    <form action="/login/sign" method="POST">
+                    <form action="/sign" method="POST">
                         
                         <div>
                             <input type="email" name="email" id="email" autocomplete="off" />

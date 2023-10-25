@@ -4,9 +4,9 @@ const { loginRender, login, adminRender } = require("../controllers/admin_contro
 
 const router = express.Router();
 
-router.get("/login", loginRender);
+router.get("/", loginRender);
 
-router.post("/login/sign", login);
+router.post("/sign", login);
 
 router.get("/admin", authMiddleware, adminRender);
 

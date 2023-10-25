@@ -38,7 +38,7 @@ datasStreamers
                 <article>
                     <a href="${streamer.twitch}" target="_blank">
                         <div class="containerImg">
-                            <img src="./public/assets/images/streamers/${streamer.name.toLowerCase().split(' ').join('-')}.webp" alt="Lien vers le profil de ${streamer.name}" >
+                            <img src="/images/streamers/${streamer.name.toLowerCase().split(' ').join('-')}.webp" alt="Lien vers le profil de ${streamer.name}" >
                         </div>
                         <h3>${streamer.name}</h3>
                     </a>

@@ -1,34 +1,38 @@
 const header = document.querySelector('header');
 
+let pathname = document.location.pathname;
+pathname = pathname.includes('index.html') ? pathname.replace('/front-end/', '') : pathname.replace('/front-end/pages/', '');
+pathname = pathname.replace('.html', '');
+
 header.innerHTML = `
 <div class="navigationHeader">
         <nav>
             <ul>
                 <li>
-                    <a href="${pathname === 'index' ? `.` : '..'}/index.html">
-                        <img src="${pathname === 'index' ? `.` : '..'}/public/assets/images/zevent/zevent-logo-105x60.webp" alt="Link for go to Home page" />
+                    <a href="/">
+                        <img src="/images/zevent/zevent-logo-105x60.webp" alt="Link for go to Home page" />
                     </a>
                 </li>
                 <li>
-                    <a href="${pathname === 'index' ? `.` : '..'}/index.html" aria-label="Link for go to Home page">
+                    <a href="/" aria-label="Link for go to Home page">
                         <span>Accueil</span>
                         <i class="fa-solid fa-house fa-2x"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="${pathname === 'index' ? `.` : '..'}/pages/associations.html" aria-label="Link for go to Associations page">
+                    <a href="/associations" aria-label="Link for go to Associations page">
                         <span>Les associations</span>
                         <i class="fa-solid fa-building fa-2x"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="${pathname === 'index' ? `.` : '..'}/pages/clips.html" aria-label="Link for go to Clips page">
+                    <a href="/clips" aria-label="Link for go to Clips page">
                         <span>Les clips</span>
                         <i class="fa-brands fa-square-youtube fa-2x"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="${pathname === 'index' ? `.` : '..'}/pages/stats.html" aria-label="Link for go to Statistics page">
+                    <a href="/stats" aria-label="Link for go to Statistics page">
                         <span>Les stats</span>
                         <i class="fa-solid fa-bars-progress fa-2x"></i>
                     </a>
@@ -36,8 +40,8 @@ header.innerHTML = `
             </ul>
         </nav>
         <div class="menu">
-            <img src="${pathname === 'index' ? `.` : '..'}/public/assets/images/header/hamburger.svg" alt="Afficher menu" class="hamburger active" />
-            <img src="${pathname === 'index' ? `.` : '..'}/public/assets/images/header/close.svg" alt="Fermer menu" class="close" />
+            <img src="/images/header/hamburger.svg" alt="Afficher menu" class="hamburger active" />
+            <img src="/images/header/close.svg" alt="Fermer menu" class="close" />
         </div>
     </div>
     

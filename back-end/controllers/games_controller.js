@@ -172,7 +172,7 @@ exports.listGames = async (req, res, next) => {
         const errorGame = req.session.errorGame ? req.session.errorGame : null;
         const games = await Game.find().sort({name: 1}).skip(skip).limit(limit);
         
-        res.status(200).render(path.join(__dirname, "../views/admin/games/list-games.ejs"), { title, games, page, maxPage, previousPage, nextPage, errorGame, successDeleteGame });
+        res.status(200).render(path.join(__dirname, "../views/admin/games/list-games.ejs"), { title, games, page, maxPage, previousPage, nextPage, errorGame, successDeleteGame, token });
 
     }
     catch(error) {
@@ -201,7 +201,7 @@ exports.createGame = async (req, res, next) => {
         const title = "Créer un jeu";
         const errorCreateGame = req.session.errorCreateGame ? req.session.errorCreateGame : null;
         const successCreateGame = req.session.successCreateGame ? req.session.successCreateGame : null;
-        res.status(200).render(path.join(__dirname, "../views/admin/games/create-game.ejs"), { title, errorCreateGame, successCreateGame });
+        res.status(200).render(path.join(__dirname, "../views/admin/games/create-game.ejs"), { title, errorCreateGame, successCreateGame, token });
     }
     catch(error) {
         console.log("Try Error Create Game Page : ", error);
@@ -251,7 +251,7 @@ exports.updateGame = async (req, res, next) => {
                 const title = "Mettre à jour un jeu";
                 const errorUpdateGame = req.session.errorUpdateGame ? req.session.errorUpdateGame : null;
                 const successUpdateGame = req.session.successUpdateGame ? req.session.successUpdateGame : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/games/update-game.ejs"), { title, game, errorUpdateGame, successUpdateGame });
+                res.status(200).render(path.join(__dirname, "../views/admin/games/update-game.ejs"), { title, game, errorUpdateGame, successUpdateGame, token });
             } else {
                 req.session.errorGame = `Jeu inexistant`;
                 res.status(401).redirect('/games');
@@ -309,7 +309,7 @@ exports.deleteGame = async (req, res, next) => {
                 res.redirect("/games");
             } else {
                 const errorDeleteGame = req.session.errorDeleteGame ? req.session.errorDeleteGame : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/games/delete-game.ejs"), { title, game, errorDeleteGame });
+                res.status(200).render(path.join(__dirname, "../views/admin/games/delete-game.ejs"), { title, game, errorDeleteGame, token });
             }
         })
         .catch(error => {

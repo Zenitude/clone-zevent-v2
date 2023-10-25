@@ -22,7 +22,6 @@ const findUserByMail = async (req) => {
 exports.loginRender = async (req, res, next) => {
     try {
         const errorFindUser = req.session.errorFindUser ? req.session.errorFindUser : null;
-
         const token = req.cookies.token;
 
         if(token) {
@@ -30,7 +29,7 @@ exports.loginRender = async (req, res, next) => {
         }
 
         const title = "Connexion Admin";
-        res.status(200).render(path.join(__dirname, "../views/admin/login.ejs"), { title, errorFindUser });        
+        res.status(200).render(path.join(__dirname, "../views/login.ejs"), { title, errorFindUser, token });        
     }
     catch(error) {
         console.log("Try Error Login Page : ", error);
@@ -56,7 +55,7 @@ exports.login = async (req, res, next) => {
                 const token = jwt.sign(
                     { userId: user._id },
                     process.env.SECRET_KEY_TOKEN,
-                    { expiresIn: '24h' }
+                    { expiresIn: '7d' }
                 );
 
                 res.cookie('token', token, {
@@ -76,20 +75,20 @@ exports.login = async (req, res, next) => {
     }
     catch(error) {
         req.session.errorFindUser = `Try Error Signin : ${error}`;
-        res.status(500).redirect("/login");
+        res.status(500).redirect("/");
     }
 }
 
 exports.adminRender = async (req, res, next) => {
     try {
         const title = "Dashboard";
-        const userConnected = req.session.userConnected ? req.session.userConnected : null;
+        const token = req.cookies.token;
 
-        if(userConnected === false) {
-            res.status(200).redirect('/login');
+        if(!token) {
+            res.status(200).redirect('/');
         }
 
-        res.status(200).render(path.join(__dirname, "../views/admin/admin.ejs"), { title });        
+        res.status(200).render(path.join(__dirname, "../views/admin/admin.ejs"), { title, token });        
     }
     catch(error) {
         console.log("Try Error Admin Page : ", error);

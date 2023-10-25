@@ -91,7 +91,7 @@ exports.listHistorics = async (req, res, next) => {
         const errorHistoric = req.session.errorHistoric ? req.session.errorHistoric : null;
         const historics = await Historic.find().skip(skip).limit(limit);
         
-        res.status(200).render(path.join(__dirname, "../views/admin/historics/list-historics.ejs"), { title, historics, page, maxPage, previousPage, nextPage, errorHistoric, successDeleteHistoric });
+        res.status(200).render(path.join(__dirname, "../views/admin/historics/list-historics.ejs"), { title, historics, page, maxPage, previousPage, nextPage, errorHistoric, successDeleteHistoric, token });
 
     }
     catch(error) {
@@ -120,7 +120,7 @@ exports.createHistoric = async (req, res, next) => {
         const title = "Créer un historique";
         const errorCreateHistoric = req.session.errorCreateHistoric ? req.session.errorCreateHistoric : null;
         const successCreateHistoric = req.session.successCreateHistoric ? req.session.successCreateHistoric : null;
-        res.status(200).render(path.join(__dirname, "../views/admin/historics/create-historic.ejs"), { title, errorCreateHistoric, successCreateHistoric });
+        res.status(200).render(path.join(__dirname, "../views/admin/historics/create-historic.ejs"), { title, errorCreateHistoric, successCreateHistoric, token });
     }
     catch(error) {
         console.log("Try Error Create Historic Page : ", error);
@@ -170,7 +170,7 @@ exports.updateHistoric = async (req, res, next) => {
                 const title = "Mettre à jour un historique";
                 const errorUpdateHistoric = req.session.errorUpdateHistoric ? req.session.errorUpdateHistoric : null;
                 const successUpdateHistoric = req.session.successUpdateHistoric ? req.session.successUpdateHistoric : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/historics/update-historic.ejs"), { title, historic, errorUpdateHistoric, successUpdateHistoric });
+                res.status(200).render(path.join(__dirname, "../views/admin/historics/update-historic.ejs"), { title, historic, errorUpdateHistoric, successUpdateHistoric, token });
             } else {
                 req.session.errorHistoric = `Historic inexistant`;
                 res.status(401).redirect('/historics');
@@ -228,7 +228,7 @@ exports.deleteHistoric = async (req, res, next) => {
                 res.redirect("/historics");
             } else {
                 const errorDeleteHistoric = req.session.errorDeleteHistoric ? req.session.errorDeleteHistoric : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/historics/delete-historic.ejs"), { title, historic, errorDeleteHistoric });
+                res.status(200).render(path.join(__dirname, "../views/admin/historics/delete-historic.ejs"), { title, historic, errorDeleteHistoric, token });
             }
         })
         .catch(error => {

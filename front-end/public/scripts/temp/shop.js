@@ -7,7 +7,7 @@ if(document.querySelector('.containerShop')) {
         return datas;
     }
     
-    const datasProducts = fetchApi('http://localhost:3001/shop');
+    const datasProducts = fetchApi('http://localhost:3001/products-list');
     
     datasProducts
     .then(products => {
@@ -17,9 +17,9 @@ if(document.querySelector('.containerShop')) {
                     <h2>${products[i].title}</h2>
                             <div class="content">
                                 <div class="carousel">
-                                        <img src="../public/assets/images/shop/${products[i].category}/${products[i].category}.webp" alt="${products[i].category}">
-                                        <img src="../public/assets/images/shop/${products[i].category}/${products[i].category}-details.webp" alt="${products[i].category} details">
-                                        <img src="../public/assets/images/shop/${products[i].category}/${products[i].category}.webp" alt="${products[i].category}">
+                                        <img src="/images/shop/${products[i].category}/${products[i].category}.webp" alt="${products[i].category}">
+                                        <img src="/images/shop/${products[i].category}/${products[i].category}-details.webp" alt="${products[i].category} details">
+                                        <img src="/images/shop/${products[i].category}/${products[i].category}.webp" alt="${products[i].category}">
                                 </div>
                                                 
                                 <div class="price">
@@ -87,7 +87,7 @@ if(document.querySelector('.containerShop')) {
                 products[i].descriptions.forEach(description => { 
                     details[i].innerHTML += `<details>
                         <summary>
-                            <img src="../public/assets/images/shop/accordion/${description.icon}" alt="Cliquez pour afficher le description de ${description.summary}">
+                            <img src="/images/shop/accordion/${description.icon}" alt="Cliquez pour afficher le description de ${description.summary}">
                             ${description.summary}
                         </summary>
                         <div>
@@ -99,7 +99,7 @@ if(document.querySelector('.containerShop')) {
                 details.innerHTML += `
                     <a href="shop.html">
                     Afficher les détails
-                    <img src="../public/assets/images/shop/arrow.svg" alt="Aller sur la page de présentation du ${products[i].category}">
+                    <img src="/images/shop/arrow.svg" alt="Aller sur la page de présentation du ${products[i].category}">
                     </a>
                 `;
             }

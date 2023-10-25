@@ -2,7 +2,6 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const path = require("path");
-const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const multer = require("multer");
@@ -13,8 +12,7 @@ const connectDb = require("./utils/database/database");
 dotenv.config();
 const app = express();
 
-// app.use(express.urlencoded({extended: false}));
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(multer().any());
@@ -25,11 +23,10 @@ app.use(session({
     saveUninitialized: false
 }))
 
-const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
-const streamersRoutes = require('./routes/streamers');
-const historicsRoutes = require('./routes/historics');
 const usersRoutes = require('./routes/users');
+const historicsRoutes = require('./routes/historics');
+const streamersRoutes = require('./routes/streamers');
 const gamesRoutes = require('./routes/games');
 const errorRoutes = require('./routes/error');
 
@@ -49,25 +46,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(shopRoutes);
 app.use(adminRoutes);
-app.use(streamersRoutes);
-app.use(historicsRoutes);
 app.use(usersRoutes);
+app.use(historicsRoutes);
+app.use(streamersRoutes);
 app.use(gamesRoutes);
 app.use(errorRoutes);
-
-app.use((req, res, next) => {
-    try{
-        const title = "Erreur 404";
-        res.status(200).render(path.join(__dirname, "../front-end/pages/error.ejs"), {title});    
-    }
-    catch(error) {
-        console.log("Error Try Page Error : ", error)
-    }
-})
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Site disponible à l'adresse suivante : http://${process.env.HOST}:${process.env.PORT ? process.env.PORT : 3000}`);
 });
-

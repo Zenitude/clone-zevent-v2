@@ -171,7 +171,7 @@ exports.listStreamers = async (req, res, next) => {
         const errorStreamer = req.session.errorStreamer ? req.session.errorStreamer : null;
         const streamers = await Streamer.find().sort({name: 1}).skip(skip).limit(limit);
         
-        res.status(200).render(path.join(__dirname, "../views/admin/streamers/list-streamers.ejs"), { title, streamers, page, maxPage, previousPage, nextPage, errorStreamer, successDeleteStreamer });
+        res.status(200).render(path.join(__dirname, "../views/admin/streamers/list-streamers.ejs"), { title, streamers, page, maxPage, previousPage, nextPage, errorStreamer, successDeleteStreamer, token });
 
     }
     catch(error) {
@@ -200,7 +200,7 @@ exports.createStreamer = async (req, res, next) => {
         const title = "Créer un streamer";
         const errorCreateStreamer = req.session.errorCreateStreamer ? req.session.errorCreateStreamer : null;
         const successCreateStreamer = req.session.successCreateStreamer ? req.session.successCreateStreamer : null;
-        res.status(200).render(path.join(__dirname, "../views/admin/streamers/create-streamer.ejs"), { title, errorCreateStreamer, successCreateStreamer });
+        res.status(200).render(path.join(__dirname, "../views/admin/streamers/create-streamer.ejs"), { title, errorCreateStreamer, successCreateStreamer, token });
     }
     catch(error) {
         console.log("Try Error Create Streamer Page : ", error);
@@ -250,7 +250,7 @@ exports.updateStreamer = async (req, res, next) => {
                 const title = "Mettre à jour un streamer";
                 const errorUpdateStreamer = req.session.errorUpdateStreamer ? req.session.errorUpdateStreamer : null;
                 const successUpdateStreamer = req.session.successUpdateStreamer ? req.session.successUpdateStreamer : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/streamers/update-streamer.ejs"), { title, streamer, errorUpdateStreamer, successUpdateStreamer });
+                res.status(200).render(path.join(__dirname, "../views/admin/streamers/update-streamer.ejs"), { title, streamer, errorUpdateStreamer, successUpdateStreamer, token });
             } else {
                 req.session.errorStreamer = `Streamer inexistant`;
                 res.status(401).redirect('/streamers');
@@ -308,7 +308,7 @@ exports.deleteStreamer = async (req, res, next) => {
                 res.redirect("/streamers");
             } else {
                 const errorDeleteStreamer = req.session.errorDeleteStreamer ? req.session.errorDeleteStreamer : null;
-                res.status(200).render(path.join(__dirname, "../views/admin/streamers/delete-streamer.ejs"), { title, streamer, errorDeleteStreamer });
+                res.status(200).render(path.join(__dirname, "../views/admin/streamers/delete-streamer.ejs"), { title, streamer, errorDeleteStreamer, token });
             }
         })
         .catch(error => {

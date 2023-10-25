@@ -36,7 +36,7 @@ tabs.forEach(tab => {
                     <span>01/01/2023 à 11:00</span>
                 </p>
                 <div class="avatarAndTitle">
-                    <img src="../public/assets/images/streamers/mister-mv.webp" alt="avatar de mister mv">
+                    <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
                     <h3>Title</h3>
                 </div>
                 <p class="nameAndActivity">
@@ -72,7 +72,7 @@ datasGames
             tabGame.innerHTML += `
                 <article>
                     <a href="${game.link}">
-                    <img src="../public/assets/images/games/${linkImage}.webp" alt="Lien vers la page officiel de ${game.name}">
+                    <img src="/images/games/${linkImage}.webp" alt="Lien vers la page officiel de ${game.name}">
                     <p>${game.name}</p>
                 </a>
             </article>
