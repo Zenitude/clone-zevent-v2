@@ -1544,6 +1544,15 @@ header {
     filter: drop-shadow(0 0 1px #000);
 }
 
+[class*="containerList"] .btns {
+    margin-block: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
 [class*="containerList"] table {
     border-collapse: collapse;
     margin: 25px auto 0;
@@ -1748,6 +1757,11 @@ header {
     .sidebar {
         top: 95px;
         width: 97%;
+    }
+
+    /* Admin List */
+    [class*="containerList"] .btns {
+        justify-content: flex-start;
     }
 }
 
