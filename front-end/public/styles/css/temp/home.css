@@ -102,7 +102,7 @@
 .streamers article {
     width: 100%;
     min-width: 240px;
-    max-height: 240px;
+    max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,6 +130,7 @@
     height: 90%;
     border-radius: 15px;
     filter: drop-shadow(0 0 5px #000);
+    object-fit: cover;
 }
 
 .streamers h3 {

@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const path = require("path");
 const { dateMiddleware } = require("./middlewares/date");
 
@@ -19,9 +20,10 @@ const errorRoutes = require('./routes/error');
 app.use(dateMiddleware);
 app.use(morgan("dev"));
 
-app.use("/images", express.static(path.join(__dirname, "../front-end/public/assets/images")));
-app.use("/styles", express.static(path.join(__dirname, "../front-end/public/styles/css/")));
-app.use("/scripts", express.static(path.join(__dirname, "../front-end/public/scripts/")));
+app.use("/images", express.static(path.join(__dirname, "./public/assets/images")));
+app.use("/styles", express.static(path.join(__dirname, "./public/styles/css/")));
+app.use("/scripts", express.static(path.join(__dirname, "./public/scripts/")));
+
 
 app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "*");

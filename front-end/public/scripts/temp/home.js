@@ -14,7 +14,7 @@ datasHistorics
         historics.forEach(historic => {
             cardsHistorics.innerHTML += `
             <article>
-                <h3>${historics.date}</h3>
+                <h3>${historic.date}</h3>
                 <strong class="amount">${parseInt(historic.amount).toLocaleString("fr-FR")} €</strong>
                 <strong>${historic.associations.split(',').join(' - ')}</strong>
             </article>
