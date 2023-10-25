@@ -33,7 +33,7 @@
     font-weight: bold;
 }
 
-.containerAssociations .buttonTabs button:hover {
+.containerAssociations .buttonTabs button:is(:hover, .active) {
     background: var(--secondaryColor);
 }
 
@@ -118,7 +118,10 @@
 .contentTabs section p {
     font-size: 1rem;
     margin-block: 20px;
-    transition: font-size 1s ease-in-out;
+}
+
+.contentTabs section p a {
+    text-decoration: underline;
 }
 
 .contentTabs section :is(ul, ol) {

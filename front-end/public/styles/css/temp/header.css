@@ -2,7 +2,7 @@
 
 header {
     width: 100%;
-    height: 80px;
+    height: 90px;
     position: sticky;
     top: 0;
     backdrop-filter: blur(8px);
@@ -27,14 +27,14 @@ header {
 
 .navigationHeader {
     width: 100%;
-    height: 50px;
+    height: 60px;
     position: relative;
 }
 
 .navigationHeader nav ul {
     flex-direction: column;
     position: absolute;
-    top: 80px;
+    top: 90px;
 }
 
 .navigationHeader a {
@@ -42,12 +42,12 @@ header {
     font-size: 1.3rem;
 }
 
-.navigationHeader nav li:last-of-type img {
+.navigationHeader nav li.cart img {
     width: 50px;
     height: 50px;
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)) {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)) {
     display: none;
     width: 100%;
     line-height: 70px;
@@ -55,15 +55,15 @@ header {
     text-align: center;
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)):hover {
     box-shadow: inset 0 0 5px var(--secondaryColor);
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover a {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)):hover a {
     color: var(--secondaryColor);
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)).active {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)).active {
     display: block;
 }
 
@@ -87,20 +87,24 @@ header {
     display: none;
 }
 
-.navigationHeader nav li:last-of-type {
+.navigationHeader nav li.cart {
     position: absolute;
     right: 40px;
-    top: -80px;
+    top: -90px;
 }
 
-.navigationHeader nav li:last-of-type svg {
+.navigationHeader nav li.cart svg {
     fill: var(--thirdColor);
     width: 50px;
     height: 50px;
 }
 
-.navigationHeader nav li:last-of-type:hover svg {
+.navigationHeader nav li.cart:hover svg {
     fill: var(--secondaryColor);
+}
+
+.navigationHeader nav li span {
+    filter: drop-shadow(0 0 1px #000);
 }
 
 /* Burger Menu */
@@ -154,6 +158,6 @@ header {
 
 /* Hover links */
 
-.navigationHeader :is(a:hover, a:hover i), .networksHeader a:hover i {
+.navigationHeader :is(a:hover, a:hover i) {
     color: var(--secondaryColor);
 }

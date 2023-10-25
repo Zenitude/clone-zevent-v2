@@ -1,4 +1,4 @@
-@media all and (min-width: 385px) {
+@media all and (min-width: 405px) {
 
     /* Header */
     .navigationHeader nav ul {
@@ -15,7 +15,7 @@
         display: none;
     }
 
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)) {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)) {
         display: block;
         width: auto;
         line-height: initial;
@@ -32,10 +32,10 @@
         left: 10px;
     }
 
-    .navigationHeader nav li:last-of-type {
+    .navigationHeader nav li.cart {
         position: absolute;
-        right: 40px;
-        top: 0px;
+        right: 0;
+        top: 0;
         margin-left: auto;
         margin-right: 10px;
     }
@@ -44,11 +44,11 @@
         display: none;
     }
 
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)):hover {
         box-shadow: none;
     }
     
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover a {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)):hover a {
         color: var(--secondaryColor);
     }
 
@@ -60,6 +60,11 @@
 
     .containerAssociations {
         width: 80%;
+    }
+
+    /* Clips */
+    .sidebar {
+        top: 125px;
     }
 
     /* Shop */
@@ -88,6 +93,11 @@
     /* Clips */
     .containerClips .buttonTabsClips {
         justify-content: flex-start;
+    }
+
+    .sidebar {
+        top: 95px;
+        width: 97%;
     }
 }
 

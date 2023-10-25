@@ -7,7 +7,11 @@ if(document.querySelector('.buttonTabs'))
     for (let i = 0 ; i < buttons.length ; i++)
     {
         buttons[i].addEventListener('click', () => {
+
+            buttons.forEach(button => button.classList.remove('active'));
             
+            buttons[i].classList.add('active');
+
             if(!sections[i].classList.contains('activeTabs'))
             {
                 sections.forEach(section => {

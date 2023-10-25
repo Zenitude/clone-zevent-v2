@@ -52,7 +52,7 @@
 }
 
 /* Products global */
-.containerShop main article {
+.containerShop article {
     width: 70%;
     max-width: 700px;
     min-width: 260px;
@@ -62,16 +62,16 @@
     flex-wrap: wrap;
 }
 
-.containerShop main article h2 {
+.containerShop article h2 {
     color: var(--secondaryColor);
     width: 100%;
 }
 
-.containerShop main article h3 {
+.containerShop article h3 {
     text-align: start;
 }
 
-.containerShop main article .content {
+.containerShop article .content {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -336,7 +336,7 @@
 }
 
 .containerShop .help .containerImg {
-    background: url('/images/shop/help/help.webp') no-repeat center;
+    background: url('../../../assets/images/shop/help/help.webp') no-repeat center;
     background-size: cover;
     width: 100%;
     min-width: 240px;

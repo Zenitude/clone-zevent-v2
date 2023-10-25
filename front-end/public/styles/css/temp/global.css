@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: calc(2.5em + 1.5vw);
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
 }
 
 h2 {
@@ -66,7 +66,7 @@ body::-webkit-scrollbar-thumb
 }
 
 a, strong, h3 {
-    color: var(--secondaryColor);
+    color: var(--thirdColor);
     text-decoration: none;
 }
 

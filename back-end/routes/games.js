@@ -1,7 +1,7 @@
 const express = require("express");
 const { authMiddleware } = require("../utils/middlewares/auth");
 const { 
-    listGames, deleteGame, createGame, updateGame, 
+    listGames, gamesList, deleteGame, createGame, updateGame, 
     createConfirmGame, updateConfirmGame, deleteConfirmGame
 } = require("../controllers/games_controller");
 
@@ -9,6 +9,7 @@ const router = express.Router();
 
 // READ
 router.get("/games", authMiddleware, listGames);
+router.get("/games-list", gamesList);
 router.get("/games/create", authMiddleware, createGame);
 router.get("/games/:id/update", authMiddleware, updateGame);
 router.get("/games/:id/delete", authMiddleware, deleteGame);

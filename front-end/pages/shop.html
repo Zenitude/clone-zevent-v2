@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 
 <html lang="fr">
-    <%- include('./components/head.ejs'); %>
-
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="ZEvent est un projet caritatif en 2 parties, showcase qui fait office d'amorce, marathon de streaming, pour soutenir une association caritative" />
+        <link rel="shortcut icon" href="../public/assets/images/zevent/zevent-favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="../public/styles/css/style-min.css" type="text/css" />
+        <title>ZEvent 2022 - Du 9 au 11 septembre 2022</title>
+    </head>
     <body>
         <div class="container containerShop">
             <div class="information">
@@ -11,119 +18,46 @@
 
             <div class="intercom">
                 <svg class="intercomMsg active" fill="#fff" focusable="false" aria-hidden="true" viewBox="0 0 32 36" width="32" height="36"><path d="M28,32 C28,32 23.2863266,30.1450667 19.4727818,28.6592 L3.43749107,28.6592 C1.53921989,28.6592 0,27.0272 0,25.0144 L0,3.6448 C0,1.632 1.53921989,0 3.43749107,0 L24.5615088,0 C26.45978,0 27.9989999,1.632 27.9989999,3.6448 L27.9989999,22.0490667 L28,22.0490667 L28,32 Z M23.8614088,20.0181333 C23.5309223,19.6105242 22.9540812,19.5633836 22.5692242,19.9125333 C22.5392199,19.9392 19.5537934,22.5941333 13.9989999,22.5941333 C8.51321617,22.5941333 5.48178311,19.9584 5.4277754,19.9104 C5.04295119,19.5629428 4.46760991,19.6105095 4.13759108,20.0170667 C3.97913051,20.2124916 3.9004494,20.4673395 3.91904357,20.7249415 C3.93763774,20.9825435 4.05196575,21.2215447 4.23660523,21.3888 C4.37862552,21.5168 7.77411059,24.5386667 13.9989999,24.5386667 C20.2248893,24.5386667 23.6203743,21.5168 23.7623946,21.3888 C23.9467342,21.2215726 24.0608642,20.9827905 24.0794539,20.7254507 C24.0980436,20.4681109 24.0195551,20.2135019 23.8614088,20.0181333 Z"></path></svg>
-                <img src="/images/shop/intercom/intercom-chevron.svg" alt="fermer intercom" class="intercomChevron">
+                <img src="../public/assets/images/shop/intercom/intercom-chevron.svg" alt="fermer intercom" class="intercomChevron">
             </div>
 
-            <%- include('./components/header.ejs'); %>
+            <header></header>
 
             <main>
                 
                 <div class="banner">
-                    <img src="/images/shop/shop-banner.webp" alt="Achetez votre tshirt zevent 2022 et participez à la cagnotte, #zevent2022">
+                    <img src="../public/assets/images/shop/shop-banner.webp" alt="Achetez votre tshirt zevent 2022 et participez à la cagnotte, #zevent2022">
                 </div>
 
-                <% for(let i = 0 ; i < products.length ; i++) { %>
-
-                    <article>
-                        <h2><%= products[i].title %></h2>
-                        
-                        <div class="content">
-
-                            <div class="carousel">
-                                    <img src="/images/shop/<%= products[i].category %>/<%= products[i].category %>.webp" alt="<%= products[i].category %>">
-                                    <img src="/images/shop/<%= products[i].category %>/<%= products[i].category %>-details.webp" alt="<%= products[i].category %> details">
-                                    <img src="/images/shop/<%= products[i].category %>/<%= products[i].category %>.webp" alt="<%= products[i].category %>">
-                            </div>
-                                            
-                            <div class="price">
-                                <div>
-                                    <h3>Précommande</h3>
-                                    <% if(products[i].subtitle.length > 0) { %>
-                                        <p><%= products[i].subtitle %></p>
-                                    <% } %>
-                                    <p>€ <%= products[i].price %>,00 <span>Taxes incluses</span></p>
-                                </div>
-                                <form novalidate>  
-                                    <% if(products[i].sizes.length > 0) { %>
-                                        <div class="size">
-                                            <h3>Tailles</h3>
-                                            <p>Sélectionnez une taille</p>
-                                            <div>
-                                                <% for(let j = 0 ; j < products[i].sizes.length ; j++) { %>
-                                                    <div class="radio">
-                                                        <input type="radio" name="size" id="size-<%= products[i].sizes[j] %>">
-                                                        <label for="size-<%= products[i].sizes[j] %>"><%= products[i].sizes[j].toUpperCase() %></label>
-                                                    </div>
-                                                <% } %>
-                                            </div>
-                                        </div>
-                                    <% } %> 
-
-                                    <div class="quantity">
-                                        <label for="<%= products[i].category %>-qty">Quantité</label>
-                                        <div>
-                                            <button class="btnLess">-</button>
-                                            <input type="number" name="<%= products[i].category %>-qty" id="<%= products[i].category %>-qty" value="1" min="1" max="20">
-                                            <button class="btnMore">+</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <button class="submitButton">Acheter maintenant</button>
-                                </form>
-                            </div> 
-
-                            <div class="details">
-                                <% for(let k = 0 ; k < products[i].descriptions.length ; k++) { %>
-                                    <details>
-                                        <summary>
-                                            <img src="/images/shop/accordion/<%= products[i].descriptions[k].icon %>" alt="Cliquez pour afficher le description de <%= products[i].descriptions[k].summary %>">
-                                            <%= products[i].descriptions[k].summary %>
-                                        </summary>
-                                        <div>
-                                            <%- products[i].descriptions[k].details %>
-                                        </div>
-                                    </details>
-                                <% } %>
-
-                                <a href="shop.html">
-                                    Afficher les détails
-                                    <img src="/images/shop/arrow.svg" alt="Aller sur la page de présentation du <%= products[i].category %>">
-                                </a>
-
-                            </div>
-                        
-                        </div>
-                    </article>
-
-                <% } %>
+               <div class="products"></div>
 
                 <div class="associationsShop">
                     <section>
-                        <img src="/images/shop/associations/sea-sheperd.webp" alt="">
+                        <img src="../public/assets/images/shop/associations/sea-sheperd.webp" alt="">
                         <h3>Sea Sheperd</h3>
                         <p>Défend activement l'océan et toutes les formes de vie marine depuis 1977.</p>
-                        <a href="shop.html">En savoir plus <img src="/images/shop/arrow.svg" alt=""></a>
+                        <a href="./shop.html">En savoir plus <img src="../public/assets/images/shop/arrow.svg" alt=""></a>
                     </section>
 
                     <section>
-                        <img src="/images/shop/associations/lpo.webp" alt="">
+                        <img src="../public/assets/images/shop/associations/lpo.webp" alt="">
                         <h3>LPO</h3>
                         <p>La LPO œuvre au quotidien pour la protection des oiseaux et de l'ensemble du vivant.</p>
-                        <a href="shop.html">En savoir plus <img src="/images/shop/arrow.svg" alt=""></a>
+                        <a href="./shop.html">En savoir plus <img src="../public/assets/images/shop/arrow.svg" alt=""></a>
                     </section>
 
                     <section>
-                        <img src="/images/shop/associations/wwf.webp" alt="">
+                        <img src="../public/assets/images/shop/associations/wwf.webp" alt="">
                         <h3>WWF</h3>
                         <p>Travaille dans plus de 100 pays, pour protéger la planète, la nature et tous ses êtres vivants. </p>
-                        <a href="shop.html">En savoir plus <img src="/images/shop/arrow.svg" alt=""></a>
+                        <a href="./shop.html">En savoir plus <img src="../public/assets/images/shop/arrow.svg" alt=""></a>
                     </section>
 
                     <section>
-                        <img src="/images/shop/associations/the-seacleaners.webp" alt="">
+                        <img src="../public/assets/images/shop/associations/the-seacleaners.webp" alt="">
                         <h3>Sea Cleaners</h3>
                         <p>Lutte contre la pollution plastique des océans grâce à des actions à terre et en mer.</p>
-                        <a href="shop.html">En savoir plus <img src="/images/shop/arrow.svg" alt=""></a>
+                        <a href="./shop.html">En savoir plus <img src="../public/assets/images/shop/arrow.svg" alt=""></a>
                     </section>
                 </div>
 
@@ -159,7 +93,7 @@
                         </section>
                         
                         <div class="logoZEvent">
-                            <img src="/images/zevent/zevent-logo.webp" alt="">
+                            <img src="../public/assets/images/zevent/zevent-logo.webp" alt="">
                         </div>
                     </div>
 
@@ -216,7 +150,7 @@
 
                     <div class="copyright">
                         &copy; Zevent &nbsp;
-                        <span class="yearCopy"><%= new Date().getFullYear() %></span>
+                        <span class="yearCopy"></span>
                     </div>
                 </div>
             </footer>
@@ -224,8 +158,9 @@
         </div>
 
         <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
-        <script src="/scripts/header.js"></script>
-        <script type="module" src="scripts/shop.js"></script>
+        <script src="../public/scripts/head.min.js"></script>
+        <script src="../public/scripts/header.min.js"></script>
+        <script src="../public/scripts/temp/shop.js"></script>
 
     </body>
 </html>

@@ -1,6 +1,3 @@
-/* Global */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;500;700&display=swap');
-
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
@@ -17,8 +14,8 @@
     --networksSecondary: rgba(255,255,255,1);
     --historicsBorder : rgba(255,255,255,0.2);
     --streamers : rgba(0,0,0,1);
-    --fontTitle: 'Caveat', cursive;
-    --fontText: 'Quicksand', Arial, Helvetica, sans-serif;
+    --fontTitle: cursive;
+    --fontText: Arial, Helvetica, sans-serif;
 }
 
 html, body {
@@ -35,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: calc(2.5em + 1.5vw);
+    font-size: calc(2.5em + 1.5vw)!important;
 }
 
 h2 {
@@ -114,7 +111,7 @@ button {
 
 header {
     width: 100%;
-    height: 80px;
+    height: 90px;
     position: sticky;
     top: 0;
     backdrop-filter: blur(8px);
@@ -139,14 +136,14 @@ header {
 
 .navigationHeader {
     width: 100%;
-    height: 50px;
+    height: 60px;
     position: relative;
 }
 
 .navigationHeader nav ul {
     flex-direction: column;
     position: absolute;
-    top: 80px;
+    top: 90px;
 }
 
 .navigationHeader a {
@@ -154,12 +151,12 @@ header {
     font-size: 1.3rem;
 }
 
-.navigationHeader nav li:last-of-type img {
+.navigationHeader nav li.cart img {
     width: 50px;
     height: 50px;
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)) {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)) {
     display: none;
     width: 100%;
     line-height: 70px;
@@ -167,15 +164,15 @@ header {
     text-align: center;
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)):hover {
     box-shadow: inset 0 0 5px var(--secondaryColor);
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover a {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)):hover a {
     color: var(--secondaryColor);
 }
 
-.navigationHeader nav li:not(:is(:first-of-type, :last-of-type)).active {
+.navigationHeader nav li:not(:is(:first-of-type, .cart)).active {
     display: block;
 }
 
@@ -199,20 +196,24 @@ header {
     display: none;
 }
 
-.navigationHeader nav li:last-of-type {
+.navigationHeader nav li.cart {
     position: absolute;
     right: 40px;
-    top: -80px;
+    top: -90px;
 }
 
-.navigationHeader nav li:last-of-type svg {
+.navigationHeader nav li.cart svg {
     fill: var(--thirdColor);
     width: 50px;
     height: 50px;
 }
 
-.navigationHeader nav li:last-of-type:hover svg {
+.navigationHeader nav li.cart:hover svg {
     fill: var(--secondaryColor);
+}
+
+.navigationHeader nav li span {
+    filter: drop-shadow(0 0 1px #000);
 }
 
 /* Burger Menu */
@@ -266,7 +267,7 @@ header {
 
 /* Hover links */
 
-.navigationHeader :is(a:hover, a:hover i), .networksHeader a:hover i {
+.navigationHeader :is(a:hover, a:hover i) {
     color: var(--secondaryColor);
 }
 
@@ -454,7 +455,7 @@ header {
     font-weight: bold;
 }
 
-.containerAssociations .buttonTabs button:hover {
+.containerAssociations .buttonTabs button:is(:hover, .active) {
     background: var(--secondaryColor);
 }
 
@@ -539,7 +540,10 @@ header {
 .contentTabs section p {
     font-size: 1rem;
     margin-block: 20px;
-    transition: font-size 1s ease-in-out;
+}
+
+.contentTabs section p a {
+    text-decoration: underline;
 }
 
 .contentTabs section :is(ul, ol) {
@@ -615,11 +619,11 @@ header {
 .sidebar {
     display: none;
     position: absolute;
-    top: 120px;
+    top: 170px;
     z-index: 2;
     background: var(--streamers);
     padding: 25px;
-    width: 98%;
+    width: 95%;
     border-radius: 15px;
     text-align: center;
     box-shadow: inset 0 0 15px var(--thirdColor);
@@ -748,7 +752,7 @@ header {
 
 .clips article {
     min-width: 260px;
-    min-height: 350px;
+    height: 350px;
     padding: 0 0 10px;
     border-radius: 15px;
     color: var(--thirdColor);
@@ -800,12 +804,13 @@ header {
     padding: 0 10px;
 }
 
-.clips article .avatarAndTitle h3 {
+.clips article .avatarAndTitle h2 {
     text-align: start;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    color: var(--secondaryColor);
 }
 
-.clips article:hover .avatarAndTitle h3 {
+.clips article:hover .avatarAndTitle h2 {
     color: var(--primaryColor);
 }
 
@@ -894,7 +899,7 @@ header {
 }
 
 /* Products global */
-.containerShop main article {
+.containerShop article {
     width: 70%;
     max-width: 700px;
     min-width: 260px;
@@ -904,16 +909,16 @@ header {
     flex-wrap: wrap;
 }
 
-.containerShop main article h2 {
+.containerShop article h2 {
     color: var(--secondaryColor);
     width: 100%;
 }
 
-.containerShop main article h3 {
+.containerShop article h3 {
     text-align: start;
 }
 
-.containerShop main article .content {
+.containerShop article .content {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -1178,7 +1183,7 @@ header {
 }
 
 .containerShop .help .containerImg {
-    background: url('/images/shop/help/help.webp') no-repeat center;
+    background: url('../../assets/images/shop/help/help.webp') no-repeat center;
     background-size: cover;
     width: 100%;
     min-width: 240px;
@@ -1597,7 +1602,53 @@ header {
     border-radius: initial;
 }
 
-@media all and (min-width: 385px) {
+.switchPage {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.switchPage a i {
+    color: var(--primaryColor);
+}
+
+.switchPage a:is(:first-of-type, :last-of-type) {
+    background-color: var(--thirdColor);
+    border: 2px solid var(--secondaryColor);
+}
+
+.switchPage a:is(:nth-of-type(2), :nth-of-type(3)) {
+    background-color: var(--secondaryColor);
+    border: 2px solid var(--thirdColor);
+}
+
+.switchPage a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.switchPage span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--thirdColor);
+    color: var(--primaryColor);
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 2px solid var(--secondaryColor);
+}
+
+@media all and (min-width: 405px) {
 
     /* Header */
     .navigationHeader nav ul {
@@ -1614,7 +1665,7 @@ header {
         display: none;
     }
 
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)) {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)) {
         display: block;
         width: auto;
         line-height: initial;
@@ -1631,10 +1682,10 @@ header {
         left: 10px;
     }
 
-    .navigationHeader nav li:last-of-type {
+    .navigationHeader nav li.cart {
         position: absolute;
-        right: 40px;
-        top: 0px;
+        right: 0;
+        top: 0;
         margin-left: auto;
         margin-right: 10px;
     }
@@ -1643,21 +1694,27 @@ header {
         display: none;
     }
 
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)):hover {
         box-shadow: none;
     }
     
-    .navigationHeader nav li:not(:is(:first-of-type, :last-of-type)):hover a {
+    .navigationHeader nav li:not(:is(:first-of-type, .cart)):hover a {
         color: var(--secondaryColor);
     }
 
     /* Associations */
+
     .containerAssociations .buttonTabs button {
         padding: 10px 15px;
     }
 
     .containerAssociations {
         width: 80%;
+    }
+
+    /* Clips */
+    .sidebar {
+        top: 125px;
     }
 
     /* Shop */
@@ -1686,6 +1743,11 @@ header {
     /* Clips */
     .containerClips .buttonTabsClips {
         justify-content: flex-start;
+    }
+
+    .sidebar {
+        top: 95px;
+        width: 97%;
     }
 }
 

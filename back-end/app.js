@@ -25,15 +25,13 @@ app.use(session({
     saveUninitialized: false
 }))
 
-const homeRoutes = require("./routes/home");
-const associationsRoutes = require("./routes/associations");
-const clipsRoutes = require("./routes/clips");
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
 const streamersRoutes = require('./routes/streamers');
 const historicsRoutes = require('./routes/historics');
 const usersRoutes = require('./routes/users');
 const gamesRoutes = require('./routes/games');
+const errorRoutes = require('./routes/error');
 
 connectDb();
 
@@ -51,15 +49,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(homeRoutes);
-app.use(associationsRoutes);
-app.use(clipsRoutes);
 app.use(shopRoutes);
 app.use(adminRoutes);
 app.use(streamersRoutes);
 app.use(historicsRoutes);
 app.use(usersRoutes);
 app.use(gamesRoutes);
+app.use(errorRoutes);
 
 app.use((req, res, next) => {
     try{

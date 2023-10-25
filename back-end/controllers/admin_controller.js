@@ -26,11 +26,11 @@ exports.loginRender = async (req, res, next) => {
         const token = req.cookies.token;
 
         if(token) {
-            res.status(200).redirect('/');
+            res.status(200).redirect('/admin');
         }
 
         const title = "Connexion Admin";
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/login.ejs"), { title, errorFindUser });        
+        res.status(200).render(path.join(__dirname, "../views/admin/login.ejs"), { title, errorFindUser });        
     }
     catch(error) {
         console.log("Try Error Login Page : ", error);
@@ -89,7 +89,7 @@ exports.adminRender = async (req, res, next) => {
             res.status(200).redirect('/login');
         }
 
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/admin.ejs"), { title });        
+        res.status(200).render(path.join(__dirname, "../views/admin/admin.ejs"), { title });        
     }
     catch(error) {
         console.log("Try Error Admin Page : ", error);

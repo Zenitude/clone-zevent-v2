@@ -133,7 +133,7 @@ exports.listUsers = async (req, res, next) => {
         const userConnected = req.session.userConnected ? req.session.userConnected : null;
         const users = await User.find().sort({lastname: 1, firstname: 1}).skip(skip).limit(limit);
         
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/list-users.ejs"), { title, users, userConnected, page, maxPage, previousPage, nextPage, errorUser, successDeleteUser });
+        res.status(200).render(path.join(__dirname, "../views/admin/users/list-users.ejs"), { title, users, userConnected, page, maxPage, previousPage, nextPage, errorUser, successDeleteUser });
     }
     catch(error) {
         console.log("Try Error List Userss Page : ", error);
@@ -151,7 +151,7 @@ exports.createUser = async (req, res, next) => {
         const title = "Créer un utilisateur";
         const errorCreateUser = req.session.errorCreateUser ? req.session.errorCreateUser : null;
         const successCreateUser = req.session.successCreateUser ? req.session.successCreateUser : null;
-        res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/create-user.ejs"), { title, errorCreateUser, successCreateUser });
+        res.status(200).render(path.join(__dirname, "../views/admin/users/create-user.ejs"), { title, errorCreateUser, successCreateUser });
     }
     catch(error) {
         console.log("Try Error Create User Page : ", error);
@@ -207,7 +207,7 @@ exports.updateUser = async (req, res, next) => {
                 const userConnected = req.session.userConnected ? req.session.userConnected : null;
                 const errorUpdateUser = req.session.errorUpdateUser ? req.session.errorUpdateUser : null;
                 const successUpdateUser = req.session.successUpdateUser ? req.session.successUpdateUser : null;
-                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/update-user.ejs"), { title, user, userConnected, errorUpdateUser, successUpdateUser });
+                res.status(200).render(path.join(__dirname, "../views/admin/users/update-user.ejs"), { title, user, userConnected, errorUpdateUser, successUpdateUser });
             } else {
                 req.session.errorUser = `User inexistant`;
                 res.status(401).redirect('/users');
@@ -267,7 +267,7 @@ exports.updatePassword = async (req, res, next) => {
                 const title = "Mettre à jour un utilisateur";
                 const errorUpdatePassword = req.session.errorUpdatePassword ? req.session.errorUpdatePassword : null;
                 const successUpdatePassword = req.session.successUpdatePassword ? req.session.successUpdatePassword : null;
-                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/update-password.ejs"), { title, user, errorUpdatePassword, successUpdatePassword });
+                res.status(200).render(path.join(__dirname, "../views/admin/users/update-password.ejs"), { title, user, errorUpdatePassword, successUpdatePassword });
             } else {
                 req.session.errorUser = `User inexistant`;
                 res.status(401).redirect('/users');
@@ -332,7 +332,7 @@ exports.deleteUser = async (req, res, next) => {
                 res.redirect("/users");
             } else {
                 const errorDeleteUser = req.session.errorDeleteUser ? req.session.errorDeleteUser : null;
-                res.status(200).render(path.join(__dirname, "../../front-end/pages/admin/users/delete-user.ejs"), { title, user, errorDeleteUser });
+                res.status(200).render(path.join(__dirname, "../views/admin/users/delete-user.ejs"), { title, user, errorDeleteUser });
             }
         })
         .catch(error => {
