@@ -300,6 +300,7 @@ exports.updateConfirmGame = async (req, res, next) => {
 exports.deleteGame = async (req, res, next) => {
     try {
         const title = "Suppression d'un jeu";
+        const token = req.cookies.token;
 
         await findGameById(req.params.id)
         .then(game => {

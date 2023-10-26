@@ -10,10 +10,15 @@
     margin: 0 auto;
 }
 
+.figure {
+    width: 100%;
+    height: 100%;
+}
+
 .banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
 }
 
 /* Introduction */
@@ -125,12 +130,16 @@
     align-items: center;
 }
 
-.streamers img {
+.streamers figure {
     width: 90%;
     height: 90%;
     border-radius: 15px;
     filter: drop-shadow(0 0 5px #000);
-    object-fit: cover;
+}
+
+.streamers img {
+    width: 100%;
+    height: 100%;
 }
 
 .streamers h3 {

@@ -219,6 +219,7 @@ exports.updateConfirmHistoric = async (req, res, next) => {
 exports.deleteHistoric = async (req, res, next) => {
     try {
         const title = "Suppression d'un historique";
+        const token = req.cookies.token;
 
         await findHistoricById(req.params.id)
         .then(historic => {

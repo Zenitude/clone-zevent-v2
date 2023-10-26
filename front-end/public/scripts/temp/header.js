@@ -85,3 +85,21 @@ if(document.querySelector('.menu')) {
         links.forEach(link => link.classList.toggle('active'));
     });
 }
+
+if(document.querySelector('dialog')) {
+    const btnOpen = document.querySelector('.disconnect');
+    const btnClose = document.querySelectorAll('.closeModal');
+    const modal = document.querySelector('dialog');
+
+    btnOpen.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.showModal();
+    })
+
+    btnClose.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.close();
+        })
+    })
+}

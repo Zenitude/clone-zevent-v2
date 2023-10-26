@@ -1,3 +1,17 @@
+@font-face {
+    font-family: "Caveat";
+    src:
+      local("Caveat"),
+      url("../fonts/Caveat/Caveat-VariableFont_wght.ttf") format("ttf")
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src:
+      local("Quicksand"),
+      url("../fonts/Quicksand/Quicksand-VariableFont_wght.ttf") format("ttf")
+}
+
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;

@@ -28,6 +28,7 @@ const usersRoutes = require('./routes/users');
 const historicsRoutes = require('./routes/historics');
 const streamersRoutes = require('./routes/streamers');
 const gamesRoutes = require('./routes/games');
+const shopRoutes = require('./routes/shop');
 const errorRoutes = require('./routes/error');
 
 connectDb();
@@ -51,6 +52,7 @@ app.use(usersRoutes);
 app.use(historicsRoutes);
 app.use(streamersRoutes);
 app.use(gamesRoutes);
+app.use(shopRoutes);
 app.use(errorRoutes);
 
 app.listen(process.env.PORT || 3000, () => {

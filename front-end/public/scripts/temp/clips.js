@@ -37,7 +37,7 @@ tabs.forEach(tab => {
                 </p>
                 <div class="avatarAndTitle">
                     <img src="/images/streamers/mister-mv.webp" alt="avatar de mister mv">
-                    <h3>Title</h3>
+                    <h2>Title</h2>
                 </div>
                 <p class="nameAndActivity">
                     <span>Nom streamer</span> -

@@ -323,6 +323,7 @@ exports.updateConfirmPassword = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     try {
         const title = "Suppression d'un utilisateur";
+        const token = req.cookies.token;
 
         await findUserById(req.params.id)
         .then(user => {

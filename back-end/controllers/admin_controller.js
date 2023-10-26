@@ -94,3 +94,13 @@ exports.adminRender = async (req, res, next) => {
         console.log("Try Error Admin Page : ", error);
     }
 }
+
+exports.logout = async (req, res, next) => {
+    try {
+        await res.clearCookie('token');
+        await req.session.destroy();
+        res.redirect('/');
+    } catch(error) {
+        res.status(500).json({message: error.message});
+    }
+}

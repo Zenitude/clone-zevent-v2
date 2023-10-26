@@ -299,6 +299,7 @@ exports.updateConfirmStreamer = async (req, res, next) => {
 exports.deleteStreamer = async (req, res, next) => {
     try {
         const title = "Supprimer un streamer";
+        const token = req.cookies.token;
 
         await findStreamerById(req.params.id)
         .then(streamer => {

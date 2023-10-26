@@ -1,3 +1,20 @@
+@font-face {
+    font-family: "Caveat";
+    src:
+      local("Caveat"),
+      url("/styles/fonts/Caveat/Caveat-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
+    
+}
+
+@font-face {
+    font-family: "Quicksand";
+    src:
+      local("Quicksand"),
+      url("/styles/fonts/Quicksand/Quicksand-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
+}
+
 *, ::before, ::after {
     box-sizing: border-box;
     margin: 0;
@@ -32,19 +49,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: calc(2.5em + 1.5vw);
+    font-size: calc(2em + 1.2vw);
 }
 
 h2 {
-    font-size: calc(1.7rem + 1.3vw);
+    font-size: calc(1.3rem + 1vw);
 }
 
 h3 {
-    font-size: calc(1.3rem + 1.1vw);
+    font-size: calc(1rem + 0.9vw);
 }
 
 h4 {
-    font-size: calc(1rem + 0.9vw);
+    font-size: calc(0.9rem + 0.8vw);
 }
 
 body::-webkit-scrollbar
@@ -198,8 +215,12 @@ header {
 
 .navigationHeader nav li.cart {
     position: absolute;
-    right: 40px;
+    right: 50px;
     top: -90px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navigationHeader nav li.cart svg {
@@ -276,6 +297,93 @@ header {
     margin: 0 auto;
 }
 
+/* Logout */
+.navigationHeader button {
+    background-color: transparent;
+    border: none;
+}
+
+.navigationHeader .logout i {
+    color: var(--secondaryColor);
+}
+
+.navigationHeader .logout:hover i {
+    color: rgb(255, 0, 0);
+}
+
+dialog {
+    margin: auto;
+    min-width: 250px;
+    height: 250px;
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--secondaryColor);
+    box-shadow: inset 0 0 5px var(--secondaryColor), 0 0 5px var(--secondaryColor);
+    background-color: transparent;
+    border-radius: 15px;
+    position: relative;
+}
+
+dialog::backdrop {
+    background: rgba(0,0,0,0.5);
+}
+
+.closeModal {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    margin-left: auto;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+dialog p {
+    color: var(--thirdColor);
+    text-align: center;
+    width: 90%;
+    margin: 50px auto 30px;
+    font-weight: bold;
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+dialog form :is(button, .closeModal) {
+    margin-left:0;
+    width: 200px;
+    height: 50px;
+    padding: 5px 0;
+    position: static;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+dialog form button {
+    background-color: rgb(255,0,0);
+}
+
+dialog form .closeModal {
+    background-color: var(--thirdColor);
+}
+
+dialog form button:hover {
+    background-color: rgb(163, 17, 17);
+    color: var(--thirdColor);
+}
+
+.closeModal:hover {
+    background-color: var(--secondaryColor);
+    color: var(--thirdColor);
+}
+
 /* Banner Home */
 .banner {
     width: 80%;
@@ -283,10 +391,14 @@ header {
     margin: 0 auto;
 }
 
+.figure {
+    width: 100%;
+    height: 100%;
+}
+
 .banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 /* Introduction */
@@ -398,11 +510,16 @@ header {
     align-items: center;
 }
 
-.streamers img {
+.streamers figure {
     width: 90%;
     height: 90%;
     border-radius: 15px;
     filter: drop-shadow(0 0 5px #000);
+}
+
+.streamers img {
+    width: 100%;
+    height: 100%;
 }
 
 .streamers h3 {
@@ -538,7 +655,7 @@ header {
 }
 
 .contentTabs section p {
-    font-size: 1rem;
+    font-size: 0.75rem;
     margin-block: 20px;
 }
 
@@ -892,10 +1009,14 @@ header {
     margin: 0 auto 20px;
 }
 
+.containerShop .banner figure {
+    width: 100%;
+    height: 100%;
+}
+
 .containerShop .banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 /* Products global */
@@ -1667,7 +1788,7 @@ body.containerList {
     border: 2px solid var(--secondaryColor);
 }
 
-@media all and (min-width: 405px) {
+@media screen and (min-width: 405px) {
 
     /* Header */
     .navigationHeader nav ul {
@@ -1748,7 +1869,7 @@ body.containerList {
     }
 }
 
-@media all and (min-width: 700px) {
+@media screen and (min-width: 700px) {
     /* Header */
     .navigationHeader nav li:first-of-type {
         left: 50%;
@@ -1775,7 +1896,7 @@ body.containerList {
     }
 }
 
-@media all and (min-width: 1000px) {
+@media screen and (min-width: 1000px) {
 
     /* Header */
     .navigationHeader nav a i {
@@ -1794,7 +1915,7 @@ body.containerList {
     /* Associations */
     .contentTabs section :is(p, li) {
         text-align: justify;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     /* Shop */

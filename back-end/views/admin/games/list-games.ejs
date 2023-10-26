@@ -3,13 +3,14 @@
 <html lang="fr">
     <%- include('../../components/head.ejs'); %>
     
-    <body>
+    <body class="containerList">
         <div class="container containerListGame">
             <%- include('../../components/header.ejs'); %>
             <main>  
-                <h1>Liste des Jeux</h1>
-                <a href="/admin" class="back"><span>Dashboard</span></a>
-                <a href="/games/create" class="create"><span>Ajouter un jeu</span></a>
+                <div class="btns">
+                    <a href="/admin" class="back"><span>Dashboard</span></a>
+                    <a href="/games/create" class="create"><span>Ajouter un jeu</span></a>
+                </div>
 
                 <% if(errorGame && errorGame != null) { %>
                     <p><%= errorGame; %></p>
@@ -19,25 +20,29 @@
                     <p><%= successDeleteGame; %> </p>
                 <% } %>
 
+                <h1>Liste des Jeux</h1>
+
                 <% if(games && games.length > 0) { %>
-                    <table>
+                    <div class="containerTableList">
+                        <table>
                         
-                        <% games.forEach(game => { %>
-                            <tr>
-                                <td><%= game.name; %></td>
-                                <td class="update">
-                                    <a href=<%= `/games/${game._id}/update`; %>>
-                                        <img src="/images/crud/update.webp" alt="Modifier les données de <%= game.name %>">
-                                    </a>
-                                </td>
-                                <td class="delete">
-                                    <a href=<%= `/games/${game._id}/delete`; %>>
-                                        <img src="/images/crud/delete.webp" alt="Supprimer les données de <%= game.name %>">
-                                    </a>
-                                </td>
-                            </tr>
-                        <% }) %>
-                    </table>
+                            <% games.forEach(game => { %>
+                                <tr>
+                                    <td><%= game.name; %></td>
+                                    <td class="update">
+                                        <a href=<%= `/games/${game._id}/update`; %>>
+                                            <img src="/images/crud/update.webp" alt="Modifier les données de <%= game.name %>">
+                                        </a>
+                                    </td>
+                                    <td class="delete">
+                                        <a href=<%= `/games/${game._id}/delete`; %>>
+                                            <img src="/images/crud/delete.webp" alt="Supprimer les données de <%= game.name %>">
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </table>
+                    </div>
                     <% if(page && maxPage > 1) { %>
                         <div class="switchPage">
                             <a href="/games?page=1" aria-label="première page">
@@ -65,7 +70,7 @@
         </div>
 
         <script src="https://kit.fontawesome.com/10a6ffe905.js" crossorigin="anonymous"></script>
-        <script src="/scripts/header.js"></script>
+        <script src="/scripts/header.min.js"></script>
 
     </body>
 </html>
