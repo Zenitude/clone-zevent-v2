@@ -91,15 +91,20 @@ if(document.querySelector('dialog')) {
     const btnClose = document.querySelectorAll('.closeModal');
     const modal = document.querySelector('dialog');
 
-    btnOpen.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.showModal();
-    })
-
-    btnClose.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+    if(btnOpen) {
+        btnOpen.addEventListener('click', (e) => {
             e.preventDefault();
-            modal.close();
+            modal.showModal();
         })
-    })
+    }
+    
+    if(btnClose) {
+        btnClose.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.close();
+            })
+        })
+    }
+    
 }

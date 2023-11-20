@@ -160,6 +160,10 @@ header {
     border-radius: 5px;
 }
 
+.networksHeader li:hover a {
+    background-color: var(--secondaryColor);
+}
+
 /* Hover links */
 .navigationHeader :is(a:hover, a:hover i) {
     color: var(--secondaryColor);
