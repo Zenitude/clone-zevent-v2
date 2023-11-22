@@ -1656,7 +1656,7 @@ dialog form button:hover {
 
 /* List */
 body.containerList {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 [class*="containerList"] a:is(.create, .back) {
@@ -1914,7 +1914,7 @@ body.containerList {
     }
 }
 
-@media screen and (min-width: 1000px) {
+@media all and (min-width: 1000px) {
 
     /* Header */
     .navigationHeader nav a i {
@@ -1933,7 +1933,7 @@ body.containerList {
     /* Associations */
     .contentTabs section :is(p, li) {
         text-align: justify;
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     /* Shop */
@@ -1954,7 +1954,7 @@ body.containerList {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        height: 50vh;
+        height: 60vh;
         position: sticky;
         top: 90px;
     }

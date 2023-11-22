@@ -166,7 +166,7 @@
 
 /* List */
 body.containerList {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 [class*="containerList"] a:is(.create, .back) {
